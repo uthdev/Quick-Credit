@@ -1,0 +1,151 @@
+@import './header.css';
+@import './footer.css';
+@import './form.css';
+@import './global.css';
+
+.showcase {
+  background: url(../img/adolescent-beautiful-brunette-919436.jpg);
+  background-attachment: fixed;
+  background-position: initial;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  min-height: 500px;
+}
+
+.showcase__content {
+  align-content: center;
+  /* color: # */
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-evenly; */
+  padding: 20px;
+  width: 40%;
+}
+
+.showcase__header {
+  color: #ffffff;
+  font-weight: bold;
+  padding: 15px;
+  text-align: center;
+  text-transform: capitalize;
+}
+
+.showcase__submit {
+  align-self: center;
+  border: none;
+  background-color: #F2E52E;
+  border-radius: 8px;
+  color: #617973;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: bold;
+  min-width: 35%;
+  padding: 15px;
+  text-transform: capitalize;
+}
+.showcase__form-container {
+  padding: 20px;
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  /* align-items: ; */
+  justify-content: flex-start;
+}
+
+
+
+.how {
+  background: rgb(229, 227, 227);
+  padding-top: 20px;
+  padding-bottom: 30px;
+}
+
+.how__header {
+  margin: 0;
+  padding: 20px 0;
+  text-align: center;
+  text-transform: capitalize;
+}
+
+.how__boxes {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  padding: 0 10px;
+}
+
+.how__box {
+  background: rgb(248, 244, 244);
+  border-radius: 8px;
+  margin: 10px;
+  min-width: 200px;
+  padding: 15px;
+  text-align: center;
+  width: 25%;
+}
+
+.box__header {
+  color: #FF4787;
+}
+
+.box__span {
+  background: #FF4787;
+  border-radius: 50%;
+  color: #ffffff;
+  margin-right: 20px;
+  padding: 10px;
+}
+
+.loan-packages {
+  background:  url(../img/adult-beautiful-blur-935759.jpg);
+  background-attachment: fixed;
+  background-position: initial;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding-bottom: 20px;
+}
+
+.loan-packages__header {
+  color: #ffffff;
+  margin: 0;
+  padding: 20px 0;
+  text-align: center;
+  text-transform: capitalize;
+}
+
+.loan-packages__boxes {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-evenly;
+  padding: 0 10px;
+}
+
+.loan-packages__box {
+  background: rgba(185, 185, 185, 0.493);
+  border-radius: 8px;
+  margin: 10px;
+  min-width: 200px;
+  padding: 15px;
+  text-align: center;
+  width: 25%
+}
+
+.loan-packages__img {
+  min-width: 70%;
+  height: 120px;
+}
+
+.about-us {
+  background: #617973;
+  color: #ffffff;
+  line-height: 2em;
+  padding: 20px 10%;
+  text-align: center;
+  text-transform: capitalize;
+}
+
