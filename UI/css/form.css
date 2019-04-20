@@ -1,0 +1,39 @@
+.form__header {
+  background: #F2E52E;
+  margin: 0;
+  font-size: 16px;
+  padding: 20px;
+  text-align: center;
+}
+
+.form {
+  background: rgba(185, 185, 185, 0.493);
+  border-radius: 5px;
+}
+
+.form__content {
+  padding: 20px;
+}
+
+.form__input {
+  display: block;
+  font-size: 18px;
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 3px;
+  box-sizing: border-box;
+}
+
+.form__input--submit--yellow {
+  background: #F2E52E;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.form__span {
+  color: #F2E52E;
+  font-weight: bold;
+  cursor: pointer;
+}

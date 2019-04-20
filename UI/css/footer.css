@@ -1,0 +1,21 @@
+.footer {
+  background: #F2E52E;
+  padding: 20px;
+}
+
+.footer__content {
+  display: flex;
+  justify-content: space-between;
+}
+.footer__copyright {
+  margin: 0;
+  padding: 20px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.social-media__img {
+  border-radius: 50%;
+  height: 30px;
+  margin-right: 20px;
+}
