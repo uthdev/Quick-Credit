@@ -26,6 +26,10 @@
   box-sizing: border-box;
 }
 
+.form__input--margin {
+  margin: 0;
+  padding: 10px 0;
+}
 .form__input--submit--yellow {
   background: #F2E52E;
   font-weight: bold;
@@ -33,7 +37,8 @@
 }
 
 .form__span {
-  color: #F2E52E;
+  color: #FF4787;
   font-weight: bold;
   cursor: pointer;
+  /* text-decoration-line: none; */
 }
