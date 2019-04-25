@@ -1,0 +1,43 @@
+@import './global.css';
+@import './footer.css';
+@import './form.css';
+@import './header.css';
+
+
+.loan-application__container {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.form__control {
+  background: #ffffff;
+  color: #111111;
+  display: block;
+  font-size: 18px;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 3px;
+  box-sizing: border-box;
+  outline: none;
+  resize: none;
+  width: 100%;
+}
+
+.form-content__container {
+  padding: 20px;
+  display: -ms-flexbox; /*IE108 */
+  display: flex; 
+}
+
+.form__icon {
+  background: #ffffff;
+  min-width: 50px;
+  padding: 12px 12px;
+  text-align: center;
+}
+
+
+.form__container {
+  padding: 10px;
+}
