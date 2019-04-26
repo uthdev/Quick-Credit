@@ -41,3 +41,37 @@
 .form__container {
   padding: 10px;
 }
+
+.form__slider {
+  border-radius: 15px;
+  /* resize: none; */
+  /* -webkit-appearance: none; */
+  width: 70%;
+  background: #111111;
+  /* background: #F2E52E; */
+  outline: none;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.form__slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 50px;
+  height: 25px;
+  background: #111111;
+  cursor: pointer;
+  border-radius: 15px;
+}
+
+.form__slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  background: #111111;
+  cursor: pointer;
+  border-radius: 15px;
+}
+
+.form-content__container--flex--column {
+  flex-direction: column;
+}

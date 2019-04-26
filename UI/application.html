@@ -7,10 +7,12 @@
     <title>Quick Credit | Loan application</title>
     <link rel="stylesheet" href="./css/application.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <script src="./script/application.js"> 
+    </script>
   </head>
   <body class="page">
     <header class="page__header header">
-      <h1 class="header__title"><a class="link" href="./Index.html">Quick Credit</a></h1>
+      <a class="link" href="./Index.html"> <img class="header__icon" src="./img/quick-credit-icon.jpeg" alt="Quick Credit" srcset=""> </a>
       <nav class="nav"> 
         <ul class="nav__content">
           <li class="nav__item"><a class="link" href="./index.html#loan-packages">LOAN PACKAGES</a></li>
@@ -88,17 +90,6 @@
                 <input class="form__control" type="date" name="birthday" max="2001-01-01" id="birthday" placeholder="Date of Birth">
               </div> 
               <div class="form-content__container">
-                <i class="fas fa-search-dollar form__icon"></i>
-                <select class="form__control" name="loan-reason" id="" required>
-                  <option value="loan-reason"disabled selected>Purpose of the Loan</option>
-                  <option value="student-loan">Student Loan</option>
-                  <option value="pay-day-loan">Pay Day Loan</option>
-                  <option value="small-business-loan">Small Business Loan</option>
-                  <option value="medical-emergency-loan">Medical Emergency Loan</option>
-                  <option value="house"></option>
-                </select>
-              </div> 
-              <div class="form-content__container">
                 <i class="fas fa-map-marker-alt form__icon"></i>
                 <textarea class="form__control" name="home-address" id="" cols="15" rows="5" placeholder="Home Address"></textarea>
               </div> 
@@ -113,8 +104,8 @@
                 <i class="fas fa-briefcase form__icon"></i>
                 <select class="form__control" name="work-details" id="">
                   <option value="Source of Livelihood" selected disabled></option>
-                  <option value="Employed"></option>
-                  <option value="Businessman"></option>
+                  <option value="Employed">Employed</option>
+                  <option value="Businessman">Businessman</option>
                 </select>
               </div> 
               <div class="form-content__container">
@@ -137,6 +128,42 @@
               </div> 
             </div>           
           </div>          
+        </form>
+        <form class="form" action="">
+          <div class="form__content">
+            <h3>Loan Information</h3>
+            <div class="form__container">
+              <div class="form-content__container">
+                <i class="fas fa-search-dollar form__icon"></i>
+                <select class="form__control" name="loan-reason" id="" required>
+                  <option value="loan-reason"disabled selected>Purpose of the Loan</option>
+                  <option value="student-loan">Student Loan</option>
+                  <option value="pay-day-loan">Pay Day Loan</option>
+                  <option value="small-business-loan">Small Business Loan</option>
+                  <option value="medical-emergency-loan">Medical Emergency Loan</option>
+                  <option value="house"></option>
+                </select>
+              </div> 
+              <div class="form-content__container form-content__container--flex--column">
+                <p>Use the slider to select preferred loan amount</p>
+                <span class="form__span" id="selected">Amount: </span>
+                <div class="form__control">
+                  <label for="amount">500000 Naira
+                      <input class="form__slider" type="range" name="amount" id="amount" max="1000000" min="50000"> 1 million Naira
+                  </label>
+                  <p>Monthly Repayments</p>
+                </div>
+              </div>
+              <div class="form-content__container">
+                <i class="far fa-calendar-alt form__icon"></i>
+                <input class="form__control" type="number" name="tenure" id="tenure" max="12" min="1" placeholder="Select Preferred Loan Tenure">
+              </div>
+              <div class="form-content__container">
+                <input class="form__input form__input--submit--yellow" type="submit" value="Apply">
+              </div>
+            </div>
+          </div>
+          
         </form>
       </div>
     </section>
