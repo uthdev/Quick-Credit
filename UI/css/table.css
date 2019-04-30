@@ -22,3 +22,14 @@
 .table__row:nth-child(even) {
   background: rgba(242, 229, 46, 0.555);
 }
+
+@media (max-width: 950px) {
+  .table__header--width {
+    padding: 10px;
+  }
+
+  .table__data {
+    text-align: center;
+    padding: 0;
+  }
+}
