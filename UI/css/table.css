@@ -1,0 +1,24 @@
+.table__header {
+  background: #F2E52E;
+  margin: 0;
+  font-size: 16px;
+  padding: 20px;
+  text-align: center;
+}
+
+.table {
+  background: rgba(185, 185, 185, 0.493);
+  border-collapse: collapse;
+  border-spacing: 0;
+  border-radius: 5px;
+  width: 100%
+}
+
+.table__data {
+  text-align: left;
+  padding: 16px;
+}
+
+.table__row:nth-child(even) {
+  background: rgba(242, 229, 46, 0.555);
+}
