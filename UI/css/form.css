@@ -47,12 +47,6 @@
   /* text-decoration-line: none; */
 }
 
-.container {
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
-}
-
 .form__control {
   background: #ffffff;
   color: #111111;
