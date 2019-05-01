@@ -23,6 +23,28 @@
   background: rgba(242, 229, 46, 0.555);
 }
 
+.button-container {
+  display: flex;
+  flex-direction: row;
+  padding: 20px;
+  justify-content: space-between;
+  width: 50%;
+}
+
+.button {
+  border: none;
+  background: #F2E52E;
+  color: #111111;
+  border-radius: 9px;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.button:hover {
+  background: #ffffff;
+  border: 1px solid #F2E52E;
+}
 @media (max-width: 950px) {
   .table__header--width {
     padding: 10px;
@@ -33,3 +55,4 @@
     padding: 0;
   }
 }
+
