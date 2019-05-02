@@ -4,7 +4,7 @@
   "description": "Quick Credit is an online lending platform that provides short term soft loans to individuals",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "nodemon ./server/src/index.js",
     "test": "mocha"
   },
   "repository": {
@@ -19,5 +19,8 @@
   "homepage": "https://github.com/uthdev/Quick-Credit#readme",
   "dependencies": {
     "express": "^4.16.4"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.0"
   }
 }
