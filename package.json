@@ -1,0 +1,23 @@
+{
+  "name": "quick-credit",
+  "version": "1.0.0",
+  "description": "Quick Credit is an online lending platform that provides short term soft loans to individuals",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/uthdev/Quick-Credit.git"
+  },
+  "author": "uthdev",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/uthdev/Quick-Credit/issues"
+  },
+  "homepage": "https://github.com/uthdev/Quick-Credit#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
