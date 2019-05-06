@@ -14,12 +14,21 @@ const usersTestData = {
     password: 'asdf1234',
     address: '12, west boulevard, Los Angeles, CA'
   },
-  existingUserSignUp: {
-    firstname: 'Tom',
-    lastname: 'Braddy',
+  existingUserSignIn: {
     email: 'tombraddy@yahoo.com',
+    password: 'Bradit##'
+  },
+  nonExistentUser: {
+    email: 'xyz@gmail.com',
+    password: 'abcdefgh',
+  },
+  missingLoginField: {
+    email: '',
     password: 'Bradit##',
-    address: 'I7, oshodi-isale, lagos'
+  },
+  wrongPassword: {
+    email:'johnjones@email.com',
+    password: 'asdf4321'
   }
 }
 
