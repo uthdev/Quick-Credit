@@ -10,8 +10,9 @@ export default class Bcrypt {
     return passwordHash
   }
 
-  static async comparePassword(hash, password) {
-    const match = await bcrypt.hashSync(password, bcrypt.genSaltSync(10));
+  static async comparePassword(password, hash) {
+    const match = await bcrypt.compareSync(password, hash);
+    console.log(match)
     return match;
   }
 }
