@@ -8,7 +8,7 @@ const { signUp, login } = AuthController;
 const { createAccountValidator, loginValidator } = AccountValidator;
 
 
-authRoute.post('/auth/signup', createAccountValidator, signUp);
-authRoute.post('/auth/signin', loginValidator, login);
+authRoute.post('/signup', createAccountValidator, signUp);
+authRoute.post('/signin', loginValidator, login);
 
 export default authRoute;
