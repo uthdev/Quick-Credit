@@ -5,10 +5,10 @@ class Data {
       email: 'woleadaabale@gmail.com',
       firstname: 'Wole',
       lastname: 'Adaabale',
-      password: 'wolebale',
+      password: '$2a$10$CZtWelF1z/DkjLsaM7xL.OdJTs4iRZndUagoUnje2I1ZjyBy1X.Ie',
       address: 'sw1/219, isale Osi, Ibadan',
-      status: 'unverified',
-      isAdmin: false,
+      status: 'verified',
+      isAdmin: true,
     },
     {
       id: 2,
