@@ -11,7 +11,7 @@ export default class AuthController {
   static async signUp (req, res) {
     const id = users.length + 1;
     const user =  await new User(req.body);
-    console.log(user);
+    // console.log(user);
     const userExist = users.find(existingUser => existingUser.email === user.email);
     if (userExist) {
       return res.status(409).json({
@@ -64,11 +64,11 @@ export default class AuthController {
     }
 
     const {
-      id, status, isadmin, firstname, lastname
+      id, status, isAdmin, firstname, lastname
     } = user;
 
     const token = await Jwt.generateToken({
-      id, email, status, isadmin
+      id, email, status, isAdmin
     });
 
     const response = {
