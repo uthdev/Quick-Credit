@@ -7,7 +7,6 @@ chai.use(chaiHttp);
 
 const { expect, assert } = chai;
 
-// import { validUserAccount, invalidUserAccount, existingUserSignUp } from './testData';
 const { 
   validUserAccount, invalidUserAccount, existingUserSignIn, nonExistentUser, missingLoginField, wrongPassword
 } = usersTestData;
