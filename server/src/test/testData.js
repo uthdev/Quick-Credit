@@ -1,26 +1,35 @@
 // user
 const usersTestData = {
-  validUserAccount:  {
+  validUserAccount: {
     firstname: 'john',
     lastname: 'Jones',
     email: 'johnjones@email.com',
     password: 'asdf1234',
-    address: '12, west boulevard, Los Angeles, CA'
+    address: '12, west boulevard, Los Angeles, CA',
   },
   invalidUserAccoun: {
     firstname: 'john',
     lastname: '',
     email: 'johnjones@email.com',
     password: 'asdf1234',
-    address: '12, west boulevard, Los Angeles, CA'
+    address: '12, west boulevard, Los Angeles, CA',
   },
-  existingUserSignUp: {
-    firstname: 'Tom',
-    lastname: 'Braddy',
-    email: 'tombraddy@yahoo.com',
+  existingUserSignIn: {
+    email: 'johnjones@email.com',
+    password: 'asdf1234',
+  },
+  nonExistentUser: {
+    email: 'alphabets@gmail.com',
+    password: 'abcdefgh',
+  },
+  missingLoginField: {
+    email: '',
     password: 'Bradit##',
-    address: 'I7, oshodi-isale, lagos'
-  }
-}
+  },
+  wrongPassword: {
+    email: 'johnjones@email.com',
+    password: 'wrongpass',
+  },
+};
 
-export { usersTestData};
+export { usersTestData };
