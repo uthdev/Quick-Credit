@@ -1,14 +1,15 @@
 import { Router } from 'express';
-import userController from '../controllers/userController';
-import AccountValidator from '../middlewares/userValidation';
+import UserController from '../controllers/userController';
+import Access from '../middlewares/access';
+import ParamsValidator from '../middlewares/paramsValidator';
 
-const userRouter = new Router();
-const { signUp, login } = userController;
+const { verifyToken, adminAccess } = Access;
+const { userEmail } = ParamsValidator;
 
-const { createAccountValidator, loginValidator } = AccountValidator;
+const userRoute = new Router();
 
+const { verifyClient } = UserController;
 
-userRouter.post('/auth/signup', createAccountValidator, signUp);
-userRouter.post('/auth/signin', loginValidator, login);
+userRoute.patch('/:userEmail/verify', verifyToken, adminAccess, userEmail, verifyClient);
 
-export default userRouter;
+export default userRoute;

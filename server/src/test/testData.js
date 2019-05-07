@@ -1,5 +1,5 @@
 // user
-const usersTestData = {
+const authTestData = {
   validUserAccount: {
     firstname: 'john',
     lastname: 'Jones',
@@ -32,4 +32,13 @@ const usersTestData = {
   },
 };
 
-export { usersTestData };
+const userTestData = {
+  adminUser: {
+    email: 'woleadaabale@gmail.com',
+    password: 'wolebale',
+  },
+  unverifiedExisting: 'tombraddy@yahoo.com',
+  wrongEmail: 'dattebayo.com',
+  nonExistingUser: 'alphabets@gmail.com',
+};
+export { authTestData, userTestData };
