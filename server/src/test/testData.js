@@ -15,11 +15,11 @@ const usersTestData = {
     address: '12, west boulevard, Los Angeles, CA'
   },
   existingUserSignIn: {
-    email: 'tombraddy@yahoo.com',
-    password: 'Bradit##'
+    email: 'johnjones@email.com',
+    password: 'asdf1234'
   },
   nonExistentUser: {
-    email: 'xyz@gmail.com',
+    email: 'alphabets@gmail.com',
     password: 'abcdefgh',
   },
   missingLoginField: {
@@ -28,8 +28,8 @@ const usersTestData = {
   },
   wrongPassword: {
     email:'johnjones@email.com',
-    password: 'asdf4321'
+    password: 'wrongpass'
   }
 }
 
-export { usersTestData};
+export { usersTestData };

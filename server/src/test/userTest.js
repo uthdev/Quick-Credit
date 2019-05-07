@@ -45,14 +45,16 @@ describe('USER TEST', () => {
       expect(res).to.have.status(200);
       expect(res.body).to.have.property('data');
     });
+
     it('should respond with status code 404 if user does not exist', async () => {
       const res = await chai.request(app)
       .post('/api/v1/auth/signin')
       .send(nonExistentUser);
       expect(res).to.have.status(404);
-      expect(res.body).to.be.a('object')
-      expect(res.body.message).to.equal('User does not exist');
+      expect(res.body).to.be.a('object');
+      expect(res.body.error).to.equal('User does not exist');
     });
+
     it('should respond with status code 400 if field is empty', async () => {
       const res = await chai.request(app)
       .post('/api/v1/auth/signin')
@@ -60,11 +62,12 @@ describe('USER TEST', () => {
       expect(res).to.have.status(400);
       expect(res.body).to.have.property('error');
     });
-    it('should respond with status code 400 if password is incorrect', async () => {
+
+    it('should respond with status code 401 if password is incorrect', async () => {
       const res = await chai.request(app)
       .post('/api/v1/auth/signin')
-      .send(missingLoginField);
-      expect(res).to.have.status(400);
+      .send(wrongPassword);
+      expect(res).to.have.status(401);
       expect(res.body).to.have.property('error');
     });
   })
