@@ -9,6 +9,6 @@ const { createAccountValidator, loginValidator } = AccountValidator;
 
 
 userRouter.post('/auth/signup', createAccountValidator, signUp);
-userRouter.post('/auth/signin', loginValidator, login)
+userRouter.post('/auth/signin', loginValidator, login);
 
 export default userRouter;

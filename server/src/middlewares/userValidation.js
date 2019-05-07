@@ -2,7 +2,7 @@ import Validator from 'validatorjs';
 import customErrorMsgs from '../helpers/customErrorMsgs';
 
 export default class AccountValidator {
-  static  createAccountValidator (req, res, next) {
+  static createAccountValidator(req, res, next) {
     const client = req.body;
 
     const clientProperties = {
@@ -11,7 +11,7 @@ export default class AccountValidator {
       email: 'required|email|max:50',
       password: 'required|alpha_dash|min:6|max:20',
       address: 'required|min:10|max:50',
-    }
+    };
 
     const validator = new Validator(client, clientProperties, customErrorMsgs);
     validator.passes(() => next());
@@ -24,13 +24,13 @@ export default class AccountValidator {
     });
   }
 
-  static loginValidator (req, res, next) {
+  static loginValidator(req, res, next) {
     const user = req.body;
 
     const userProperties = {
       email: 'required|email|max:50',
       password: 'required|alpha_dash|min:6|max:20',
-    }
+    };
 
     const validator = new Validator(user, userProperties, customErrorMsgs);
 
