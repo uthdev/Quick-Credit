@@ -1,7 +1,7 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../index';
-import { usersTestData } from './testData';
+import { authTestData } from './testData';
 
 chai.use(chaiHttp);
 
@@ -9,7 +9,7 @@ const { expect, assert } = chai;
 
 const { 
   validUserAccount, invalidUserAccount, existingUserSignIn, nonExistentUser, missingLoginField, wrongPassword
-} = usersTestData;
+} = authTestData;
 
 describe('USER TEST', () => {
   describe('User SignUp', () => {
