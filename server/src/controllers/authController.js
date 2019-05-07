@@ -7,7 +7,7 @@ const { users } = data;
 const { generateHash, comparePassword } = Bcrypt;
 
 
-export default class UsersController {
+export default class AuthController {
   static async signUp (req, res) {
     const id = users.length + 1;
     const user =  await new User(req.body);
