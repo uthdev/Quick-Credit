@@ -30,15 +30,16 @@ const authTestData = {
     email: 'johnjones@email.com',
     password: 'wrongpass',
   },
-};
-
-const userTestData = {
   adminUser: {
     email: 'woleadaabale@gmail.com',
     password: 'wolebale',
-  },
+  }
+};
+
+const userTestData = {
   unverifiedExisting: 'tombraddy@yahoo.com',
   wrongEmail: 'dattebayo.com',
   nonExistingUser: 'alphabets@gmail.com',
 };
+
 export { authTestData, userTestData };

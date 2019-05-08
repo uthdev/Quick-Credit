@@ -8,10 +8,10 @@ chai.use(chaiHttp);
 const { expect, assert } = chai;
 
 const { 
-  adminUser, unverifiedExisting, wrongEmail, nonExistingUser
+  unverifiedExisting, wrongEmail, nonExistingUser
 } = userTestData;
 
-const { validUserAccount, existingUserSignIn } = authTestData;
+const { existingUserSignIn, adminUser } = authTestData;
 
 let adminToken;
 let userToken;
