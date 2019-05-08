@@ -3,7 +3,12 @@ import data from '../mocks/mockData';
 const { loans } = data;
 
 export default class LoanController {
-  static async getAll (req, res) {
+  static async getAll (req, res, next) {
+    const { status, repaid } = req.query;
+
+    if(status && status) {
+      return next() 
+    }
     if (loans.length <= 0) {
       return res.status(404).json({
         status: 404,
@@ -32,5 +37,27 @@ export default class LoanController {
       status: 200,
       data: loan,
     });
+  }
+
+  static async currentRepaid (req, res) {
+    const status = req.query.status;
+    const repaid = JSON.parse(req.query.repaid);
+    const repaidUnrepaid = loans.filter(existingLoan => existingLoan.status === status && existingLoan.repaid === repaid)
+
+    if(repaidUnrepaid.length <= 0 && repaid === false) {
+      return res.status(404).json({
+        status: 404,
+        error: 'No current loan!',
+      });
+    } else if (repaidUnrepaid.length <= 0 && repaid === true) {
+      return res.status(404).json({
+        status: 404,
+        error: 'No repaid loan!',
+      });
+    }
+    return res.status(200).json({
+      status: 200,
+      data: repaidUnrepaid,
+    })
   }
 }
