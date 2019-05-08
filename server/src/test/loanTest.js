@@ -7,7 +7,7 @@ chai.use(chaiHttp);
 
 const { expect } = chai;
 const { adminUser, existingUserSignIn } = authTestData;
-const { invalidLoanId } = loanTestData
+const { invalidLoanId, invalidQueryParams } = loanTestData
 
 let adminToken;
 let userToken;
@@ -88,5 +88,29 @@ describe('LOANS TEST', () => {
       expect(res).to.have.status(200);
       expect(res.body).to.have.property('data');
     })
+
+    describe('GET REPAID  AND CURRENT LOANS', () => {
+      it('should return a status 200 and return all repaid loans', async () => {
+        const res = await chai.request(app)
+        .get('/api/v1/loans?status=approved&repaid=true')
+        .set('x-access-token', adminToken)
+        expect(res).to.have.status(200);
+        expect(res.body).to.have.property('data');
+      });
+      it('should return a status 200 and return all current loans', async () => {
+        const res = await chai.request(app)
+        .get('/api/v1/loans?status=approved&repaid=false')
+        .set('x-access-token', adminToken)
+        expect(res).to.have.status(200);
+        expect(res.body).to.have.property('data');
+      });
+      it('should return a status 400 when query validation fails', async () => {
+        const res = await chai.request(app)
+        .get(`/api/v1/loans?${invalidQueryParams}`)
+        .set('x-access-token', adminToken)
+        expect(res).to.have.status(400);
+        expect(res.body).to.have.property('error');
+      })
+    });
   })
 });

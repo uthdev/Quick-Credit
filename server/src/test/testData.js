@@ -44,5 +44,6 @@ const userTestData = {
 
 const loanTestData = {
   invalidLoanId: 'cat',
+  invalidQueryParams: 'status=rejected&repaid=true',
 }
 export { authTestData, userTestData, loanTestData };
