@@ -42,4 +42,7 @@ const userTestData = {
   nonExistingUser: 'alphabets@gmail.com',
 };
 
-export { authTestData, userTestData };
+const loanTestData = {
+  invalidLoanId: 'cat',
+}
+export { authTestData, userTestData, loanTestData };

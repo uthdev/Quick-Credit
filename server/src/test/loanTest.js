@@ -1,12 +1,13 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../index';
-import { authTestData } from './testData';
+import { authTestData, loanTestData } from './testData';
 
 chai.use(chaiHttp);
 
 const { expect } = chai;
 const { adminUser, existingUserSignIn } = authTestData;
+const { invalidLoanId } = loanTestData
 
 let adminToken;
 let userToken;
@@ -69,5 +70,23 @@ describe('LOANS TEST', () => {
       expect(res).to.have.status(200);
       expect(res.body).to.have.property('data');
     });
+  });
+
+  describe('GET SPECIFIC LOAN', () => {
+    it('should return a status 400 when params validation fails', async () => {
+      const res = await chai.request(app)
+      .get(`/api/v1/loans/${invalidLoanId}`)
+      .set('x-access-token', adminToken)
+      expect(res).to.have.status(400);
+      expect(res.body).to.have.property('error');
+    })
+
+    it('should return a status 200 and return the requested loan application', async () => {
+      const res = await chai.request(app)
+      .get(`/api/v1/loans/1`)
+      .set('x-access-token', adminToken)
+      expect(res).to.have.status(200);
+      expect(res.body).to.have.property('data');
+    })
   })
-})
+});
