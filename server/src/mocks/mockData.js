@@ -38,6 +38,51 @@ class Data {
       status: 'verified',
       isAdmin: false,
     }];
+    this.loans = [{
+      id: 1,
+      user: 'ezenwachi@gmail.com',
+      createdOn: '2019-05-08',
+      status: 'pending',
+      repaid: false,
+      tenor: 10,
+      amount: 500000.00,
+      paymentInstallment: 52500.00,
+      balance: 0.00,
+      interest: 25000.00,
+    },{
+      id: 2,
+      user: 'tombraddy@yahoo.com',
+      createdOn: '2018-02-20',
+      status: 'approved',
+      repaid: true,
+      tenor: 10,
+      amount: 1000000.00,
+      paymentInstallment: 105000.00,
+      balance: 0.00,
+      interest: 50000.00,
+    },{
+      id: 3,
+      user: 'nasirhassan04@gmail.com',
+      createdOn: '2018-12-31',
+      status: 'rejected',
+      repaid: false,
+      tenor: 1,
+      amount: 2000000.00,
+      paymentInstallment: 2200000.00,
+      balance: 0.00,
+      interest: 200000.00,
+    },{
+      id: 4,
+      user: 'tombraddy@yahoo.com',
+      createdOn: '2019-03-02',
+      status: 'approved',
+      repaid: false,
+      tenor: 10,
+      amount: 1500000.00,
+      paymentInstallment: 157500.00,
+      balance: 1260000.00,
+      interest: 75000.00
+    }]
   }
 }
 
