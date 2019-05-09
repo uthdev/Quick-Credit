@@ -33,6 +33,10 @@ const authTestData = {
   adminUser: {
     email: 'woleadaabale@gmail.com',
     password: 'wolebale',
+  }, 
+  hasUnrepaidLoanUser: {
+    email: 'tombraddy@yahoo.com',
+    password: '3eyedRaven'
   }
 };
 
@@ -53,6 +57,14 @@ const loanTestData = {
   },
   invalidApproveLoan: {
     status: 'unapproved'
+  },
+  validLoanApplication: {
+    tenor: 9,
+    amount: 1500000,
+  },
+  invalidLoanApplication: {
+    tenor: '10 years',
+    amount: 1000000000
   }
 }
 export { authTestData, userTestData, loanTestData };
