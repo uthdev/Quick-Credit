@@ -27,7 +27,7 @@ export default class AuthController {
       email, firstname, lastname, status, isAdmin, password
     } = user;  
     const authData = {
-      id, email, status, isAdmin
+      id, email, status, isAdmin, firstname, lastname
     }
 
     const token = await Jwt.generateToken(authData);  
@@ -68,7 +68,7 @@ export default class AuthController {
     } = user;
 
     const token = await Jwt.generateToken({
-      id, email, status, isAdmin
+      id, email, status, isAdmin, firstname, lastname
     });
 
     const response = {

@@ -6,11 +6,16 @@ import { authTestData, loanTestData } from './testData';
 chai.use(chaiHttp);
 
 const { expect } = chai;
-const { adminUser, existingUserSignIn } = authTestData;
-const { invalidLoanId, invalidQueryParams, validApproveLoan, validRejectLoan, invalidApproveLoan } = loanTestData
+const { adminUser, existingUserSignIn, hasUnrepaidLoanUser } = authTestData;
+const { 
+  invalidLoanId, invalidQueryParams, validApproveLoan, 
+  validRejectLoan, invalidApproveLoan, 
+  validLoanApplication, invalidLoanApplication
+} = loanTestData
 
 let adminToken;
 let userToken;
+let unrepaidLoanUserToken;
 
 describe('AUTH TEST', () => {
   it('Should signin Admin', async () => {
@@ -29,6 +34,14 @@ describe('AUTH TEST', () => {
     expect(user.body).to.have.property('data');
 
     userToken = user.body.data.token;
+
+    const unRepaidLoanUser = await chai.request(app)
+    .post('/api/v1/auth/signin')
+    .send(hasUnrepaidLoanUser);
+    expect(user).to.have.status(200);
+    expect(user.body).to.have.property('data');
+
+    unrepaidLoanUserToken = unRepaidLoanUser.body.data.token;
   });
 });
 
@@ -140,5 +153,32 @@ describe('LOANS TEST', () => {
       expect(res.body).to.have.property('error');
     })
 
+  });
+
+  describe('POST A LOAN APPLICATION', () => {
+    it('should return a status 201 code and create a loan application', async () => {
+      const res = await chai.request(app)
+      .post('/api/v1/loans')
+      .set('x-access-token', userToken)
+      .send(validLoanApplication);
+      expect(res).to.have.status(201);
+      expect(res.body).to.have.property('data');
+    });
+    it('should return a status 400 error code when loan application validation fails', async () => {
+      const res = await chai.request(app)
+      .post('/api/v1/loans')
+      .set('x-access-token', userToken)
+      .send(invalidLoanApplication);
+      expect(res).to.have.status(400);
+      expect(res.body).to.have.property('error');
+    });
+    it('should return a status 403 error code when user has an unrepaid loan', async () => {
+      const res = await chai.request(app)
+      .post('/api/v1/loans')
+      .set('x-access-token', unrepaidLoanUserToken)
+      .send(validLoanApplication);
+      expect(res).to.have.status(403);
+      expect(res.body).to.have.property('message');
+    });
   });
 });
