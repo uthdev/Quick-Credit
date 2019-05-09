@@ -1,8 +1,9 @@
 import Loan from '../models/loanModel';
 import data from '../mocks/mockData';
+import Repayment from '../models/repaymentModel';
 
 
-const { loans } = data;
+const { loans , repayments } = data;
 
 export default class LoanController {
   static async getAll (req, res, next) {
@@ -107,6 +108,50 @@ export default class LoanController {
     const response = { loanId, firstname, lastname, email, tenor, amount, paymentInstallment, status, balance, interest };
     return res.status(201).json({
       status: 200,
+      data: response,
+    })
+  }
+
+  static async createRepaymentTransaction(req, res)  {
+    const { loanId } = req.params;
+    const repaymentId = repayments.length + 1;
+    const loan = loans.find(existingLoan => existingLoan.id === Number(loanId));
+
+    if(!loan) {
+      return res.status(404).json({
+        status: 404,
+        error: `Loan application with id: ${ loanId } not found`,
+      });
+    }
+    if(loan.status === 'pending' || loan.status === 'rejected' || loan.repaid === true) {
+      return res.status(403).json({
+        status: 403,
+        error: `Loan application with id: ${loanId} is not approved or repaid`
+      })
+    } 
+    if(loan.balance === 0) {
+      loan.repaid = true;
+      return res.status(403).json({
+        status: 403,
+        message: 'Loan paid up'
+      });
+    }
+    const { amount, paymentInstallment : monthlyInstallment, balance } = loan;
+    const newBalance = balance - monthlyInstallment;
+    const totalPayable = amount + ( amount * 0.05 )
+    const paidAmount = totalPayable - newBalance;
+    const repayment = new Repayment(repaymentId, loanId, amount, monthlyInstallment);
+
+  
+    loan.balance = newBalance;
+    repayments.push(repayment);
+    const { id, createdOn } = repayment
+    const response = {
+      id, loanId, createdOn, amount, monthlyInstallment, paidAmount, balance: newBalance,  
+    }
+
+    return res.status(201).json({
+      status: 201,
       data: response,
     })
   }
