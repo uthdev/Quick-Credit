@@ -15,7 +15,7 @@ class Data {
       email: 'tombraddy@yahoo.com',
       firstname: 'Tom',
       lastname: 'Braddy',
-      password: 'Bradit##',
+      password: '$2a$10$.Qa1E97521Lkrd5zkSOrFuSnKDe84Ze1nVyHa7CqQn8fGrXIH.uf.',
       address: 'I7, oshodi-isale, lagos',
       status: 'verified',
       isAdmin: false,
