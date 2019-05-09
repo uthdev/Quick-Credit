@@ -80,9 +80,21 @@ class Data {
       tenor: 10,
       amount: 1500000.00,
       paymentInstallment: 157500.00,
-      balance: 1260000.00,
+      balance: 1575000.00,
       interest: 75000.00
-    }]
+    },{
+      id: 5,
+      user: 'nasirhassan04@gmail.com',
+      createdOn: '2018-07-20',
+      status: 'approved',
+      repaid: false,
+      tenor: 10,
+      amount: 1000000.00,
+      paymentInstallment: 105000.00,
+      balance: 105000.00,
+      interest: 50000,
+    }];
+    this.repayments = []
   }
 }
 
