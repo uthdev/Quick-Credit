@@ -195,7 +195,7 @@ describe('LOANS TEST', () => {
       .post('/api/v1/loans/5/repayment')
       .set('x-access-token', adminToken)
       expect(res).to.have.status(403);
-      expect(res.body).to.have.property('message');
+      expect(res.body).to.have.property('error');
     })
   })
 });
