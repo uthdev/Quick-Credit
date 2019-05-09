@@ -128,28 +128,22 @@ export default class LoanController {
         status: 403,
         error: `Loan application with id: ${loanId} is not approved or repaid`
       })
-    } 
-    if(loan.balance === 0) {
-      loan.repaid = true;
-      return res.status(403).json({
-        status: 403,
-        message: 'Loan paid up'
-      });
-    }
+    }   
     const { amount, paymentInstallment : monthlyInstallment, balance } = loan;
     const newBalance = balance - monthlyInstallment;
     const totalPayable = amount + ( amount * 0.05 )
     const paidAmount = totalPayable - newBalance;
     const repayment = new Repayment(repaymentId, loanId, amount, monthlyInstallment);
-
-  
     loan.balance = newBalance;
+    
+    if(loan.balance === 0) {
+      loan.repaid = true;
+    }
     repayments.push(repayment);
     const { id, createdOn } = repayment
     const response = {
       id, loanId, createdOn, amount, monthlyInstallment, paidAmount, balance: newBalance,  
     }
-
     return res.status(201).json({
       status: 201,
       data: response,
