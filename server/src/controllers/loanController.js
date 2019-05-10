@@ -93,7 +93,6 @@ export default class LoanController {
     const { tenor, amount } = req.body;
 
     const loan = await new Loan(loanId, email, tenor, amount);
-
     const hasUnrepaidLoan = loans.find( existingLoan => existingLoan.user === email && existingLoan.repaid === false && existingLoan.status === 'approved');
     
     if(hasUnrepaidLoan) {
@@ -133,7 +132,7 @@ export default class LoanController {
     const newBalance = balance - monthlyInstallment;
     const totalPayable = amount + ( amount * 0.05 )
     const paidAmount = totalPayable - newBalance;
-    const repayment = new Repayment(repaymentId, loanId, amount, monthlyInstallment);
+    const repayment = await new Repayment(repaymentId, loanId, amount, monthlyInstallment);
     loan.balance = newBalance;
     
     if(loan.balance === 0) {
@@ -147,6 +146,22 @@ export default class LoanController {
     return res.status(201).json({
       status: 201,
       data: response,
-    })
+    });
+  }
+
+  static async getRepaymentHistory(req, res) {
+    const { loanId } = req.params;
+
+    const repaymentHistory = repayments.filter(loanRepayment => Number(loanRepayment.loanId) === Number(loanId));
+    if(repaymentHistory.length <= 0) {
+      return res.status(404).json({
+        status: 404,
+        error: 'No repayment made'
+      });
+    }
+    return res.status(200).json({
+      status: 200,
+      data: repaymentHistory
+    });
   }
 }
