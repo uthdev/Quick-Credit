@@ -12,7 +12,6 @@ export default class Bcrypt {
 
   static async comparePassword(password, hash) {
     const match = await bcrypt.compareSync(password, hash);
-    console.log(match)
     return match;
   }
 }

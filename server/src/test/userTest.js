@@ -44,7 +44,6 @@ describe('USERS TEST DATA', () => {
       .set('Accept', 'application/json')
       expect(res).to.have.status(401);
       expect(res.body).to.have.property('error');
-      console.log('show?');
     });
     it('should return a status 403 error if user is not logged or wrong token is provided', async () => {
       const res = await chai.request(app)
