@@ -10,11 +10,11 @@ const { loanId } = ParamsValidator;
 const { validateQuery } = QueryValidator;
 const { approveLoanValidator, loanApplicationValidator } = LoanValidator;
 
-const { 
-  getAll, getSpecificLoan, currentRepaid, 
-  approveRejectLoan, createLoanApplication ,
-   createRepaymentTransaction
-  } = LoanController;
+const {
+  getAll, getSpecificLoan, currentRepaid,
+  approveRejectLoan, createLoanApplication,
+  createRepaymentTransaction,
+} = LoanController;
 
 const loanRoute = new Router();
 

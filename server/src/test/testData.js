@@ -33,11 +33,11 @@ const authTestData = {
   adminUser: {
     email: 'woleadaabale@gmail.com',
     password: 'wolebale',
-  }, 
+  },
   hasUnrepaidLoanUser: {
     email: 'tombraddy@yahoo.com',
-    password: '3eyedRaven'
-  }
+    password: '3eyedRaven',
+  },
 };
 
 const userTestData = {
@@ -50,13 +50,13 @@ const loanTestData = {
   invalidLoanId: 'cat',
   invalidQueryParams: 'status=rejected&repaid=true',
   validApproveLoan: {
-    status: 'approved'
+    status: 'approved',
   },
   validRejectLoan: {
-    status: 'rejected'
+    status: 'rejected',
   },
   invalidApproveLoan: {
-    status: 'unapproved'
+    status: 'unapproved',
   },
   validLoanApplication: {
     tenor: 9,
@@ -64,7 +64,7 @@ const loanTestData = {
   },
   invalidLoanApplication: {
     tenor: '10 years',
-    amount: 1000000000
-  }
-}
+    amount: 1000000000,
+  },
+};
 export { authTestData, userTestData, loanTestData };
