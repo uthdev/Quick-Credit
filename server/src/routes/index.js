@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import authRoute from './authRoutes';
 import userRoute from './userRoutes';
-import loanRoute from  './loanRoutes';
+import loanRoute from './loanRoutes';
 
 const router = new Router();
 
