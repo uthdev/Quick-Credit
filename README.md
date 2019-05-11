@@ -34,6 +34,10 @@ The project development is managed on [Pivotal tracker] https://www.pivotaltrack
 The UI is hosted on [Github pages] https://uthdev.github.io/Quick-Credit/UI/
 
 
+---
+## Backend
+The api is hosted on [Heroku] https://money-now.herokuapp.com/api/v1/
+
 
 ---
 ## Technologies Used
@@ -48,6 +52,27 @@ The UI is hosted on [Github pages] https://uthdev.github.io/Quick-Credit/UI/
 - [Chai]
 - [NYC]
 - [Postman]
+
+
+---
+## API Information
+The API is hosted on [Heroku] https://my-banka-app.herokuapp.com/api/v1/
+
+
+METHOD |  RESOURCE   |     DESCRIPTION                | ENDPOINTS
+-------|-------------|--------------------------------|-----------
+GET    | ----        | Home page                      |`/api/v1`
+POST   | loan        | Create a loan application      |`/api/v1/loans`
+PATCH  | loan        | Approve/Reject loan application|`/api/v1/loans/:loanId`
+GET    | loan        | Get a specific loan application|`/api/v1/loans/:loanId`
+GET    | loan        | Get all loans                  |`/api/v1/loans/`
+GET    | loan        | Get all repaid loans           |`/api/v1/loans?status=approved&repaid=true`
+GET    | loan        | Get all current(unrepaid) loans|`/api/v1/loans?status=approved&repaid=false`
+GET    | loan        | Get loan repayment history     |`/api/v1/loans/:loanId/repayments`
+POST   | loan        | Create a repayment transaction |`/api/v1/loans/:loanId/repayment`
+POST   | User        | User signup                    |`/api/v1/auth/signup`
+POST   | User        | User signin                    |`/api/v1/auth/signin`
+PATCH  | User        | verify a user account          |`/api/v1/user/:userEmail/verify`
 
 
 ---
