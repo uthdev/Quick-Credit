@@ -56,7 +56,7 @@ The api is hosted on [Heroku] https://money-now.herokuapp.com/api/v1/
 
 ---
 ## API Information
-The API is hosted on [Heroku] https://my-banka-app.herokuapp.com/api/v1/
+The API is hosted on [Heroku] https://money-now.herokuapp.com/api/v1/
 
 
 METHOD |  RESOURCE   |     DESCRIPTION                | ENDPOINTS
