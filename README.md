@@ -72,7 +72,7 @@ GET    | loan        | Get loan repayment history     |`/api/v1/loans/:loanId/re
 POST   | loan        | Create a repayment transaction |`/api/v1/loans/:loanId/repayment`
 POST   | User        | User signup                    |`/api/v1/auth/signup`
 POST   | User        | User signin                    |`/api/v1/auth/signin`
-PATCH  | User        | verify a user account          |`/api/v1/user/:userEmail/verify`
+PATCH  | User        | verify a user account          |`/api/v1/users/:userEmail/verify`
 
 
 ---
