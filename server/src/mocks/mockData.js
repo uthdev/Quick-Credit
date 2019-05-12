@@ -40,7 +40,7 @@ class Data {
     }];
     this.loans = [{
       id: 1,
-      user: 'ezenwachi@gmail.com',
+      user: 'Hatencer88@cuvox.de',
       createdOn: '2019-05-08',
       status: 'pending',
       repaid: false,
