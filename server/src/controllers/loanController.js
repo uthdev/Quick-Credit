@@ -1,9 +1,31 @@
+import sgMail from '@sendgrid/mail';
 import Loan from '../models/loanModel';
 import data from '../mocks/mockData';
 import Repayment from '../models/repaymentModel';
 
 
 const { loans , repayments } = data;
+const mailSender = async (loan) => {
+  sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+  let msg;
+  if (loan.status === 'approved') {
+    msg = {
+      to: loan.user,
+      from: 'adelekegbolahan92@gmail.com',
+      subject: 'Quick credit loan application',
+      html: `<p>We are glad to notify you that your loan application of ${loan.amount} has been approved.</p><strong>Please reach us through this mail for any information you require</strong>`,
+    };
+  }
+  if (loan.status === 'rejected') {
+    msg = {
+      to: loan.user,
+      from: 'services@quick-credit.com',
+      subject: 'Quick credit loan application ',
+      html: `<p>We are sorry to notify you that your loan applicationof ${loan.amount} has been rejected.</p><strong>Please reach us through this mail for any information you require</strong>`,
+    };
+  }
+  sgMail.send(msg);
+}
 
 export default class LoanController {
   static async getAll (req, res, next) {
@@ -77,7 +99,7 @@ export default class LoanController {
     }
     
     loan.status = status;
-
+    await mailSender(loan);
     const { amount : loanAmount, tenor, paymentInstallment : monthlyInstallment, interest } = loan;
     
     const response = { loanId, loanAmount, tenor, status, monthlyInstallment, interest }
