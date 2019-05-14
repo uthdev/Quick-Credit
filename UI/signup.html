@@ -6,16 +6,17 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Quick Credit | Sign Up</title>
   <link rel="stylesheet" href="./css/signup.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 </head>
 <body class="page">
   <header class="page__header header">
-    <a class="link" href="./Index.html"> <img class="header__icon" src="./img/quick-credit-icon.jpeg" alt="Quick Credit"> </a>
+    <a class="link" href="./index.html"> <img class="header__icon" src="./img/quick-credit-icon.jpeg" alt="Quick Credit"> </a>
     <nav class="nav"> 
       <ul class="nav__content">
         <li class="nav__item"><a class="link" href="./index.html#loan-packages">LOAN PACKAGES</a></li>
-        <li class="nav__item"><a class="link" href="./index.html#about-us">ABOUT US</a></li>
         <li class="nav__item"><a class="link" href="./index.html#how">HOW IT WORKS</a></li>
-        <li class="nav__item nav__item--color--visible"><a class="link" href="./Index.html">LOGIN</a></li>
+        <li class="nav__item"><a class="link" href="./index.html">LOGIN</a></li>
+        <li class="nav__item nav__item--color--visible"><a class="link" href="./application.html">GET A LOAN</a></li>
       </ul>
     </nav>
   </header>
@@ -23,12 +24,26 @@
     <form action="" class="form form--justify--center">
       <h3 class="form__header">Create Account</h3>
       <div class="form__content">
-        <input class="form__input" type="text" name="first" placeholder="First name">
-        <input class="form__input" type="text" name="last" placeholder="Last name">
-        <input class="form__input" type="text" name="address" placeholder="Address">
-        <input class="form__input" type="email" name="email" id="" placeholder="Email address">
-        <input class="form__input" type="password" name="password" id="" placeholder="Password">
-        <input class="form__input" type="password" name="" id="" placeholder="Confirm password">
+        <div class="input-container">
+          <i class="fa fa-user form__icon"></i>
+          <input class="form__control" type="text" name="first" placeholder="First name">
+        </div>
+        <div class="input-container">
+          <i class="fa fa-user form__icon"></i>
+          <input class="form__control" type="text" name="last" placeholder="Last name">
+        </div>        
+        <div class="input-container">
+          <i class="fa fa-envelope form__icon"></i>
+          <input class="form__control" type="email" name="email" id="" placeholder="Email address">
+        </div>
+        <div class="input-container">
+            <i class="fas fa-map-marker-alt form__icon"></i>
+            <input class="form__control" type="text" name="address" placeholder="Address">
+          </div>
+        <div class="input-container">
+          <i class="fa fa-key form__icon"></i>
+          <input class="form__control" type="password" name="password" id="" placeholder="Password">
+        </div>
         <label class="form__input form__input--margin">
           <input type="checkbox" checked="checked" name="terms"> I accept all <a class="link" href=""><span class="form__span">terms and conditions</span></a> 
         </label>
