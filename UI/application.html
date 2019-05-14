@@ -5,18 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Quick Credit | Loan application</title>
-    <link rel="stylesheet" href="./css/application.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/application.css">
     <script src="./script/application.js"> 
     </script>
   </head>
   <body class="page">
     <header class="page__header header">
-      <a class="link" href="./Index.html"> <img class="header__icon" src="./img/quick-credit-icon.jpeg" alt="Quick Credit" srcset=""> </a>
+      <a class="link" href="./index.html"> <img class="header__icon" src="./img/quick-credit-icon.jpeg" alt="Quick Credit" srcset=""> </a>
       <nav class="nav"> 
         <ul class="nav__content">
           <li class="nav__item"><a class="link" href="./index.html#loan-packages">LOAN PACKAGES</a></li>
-          <li class="nav__item"><a class="link" href="./Index.html#about-us">ABOUT US</a></li>
           <li class="nav__item"><a class="link" href="./index.html#how">HOW IT WORKS</a></li>
           <li class="nav__item nav__item--color--visible"><a class="link" href="./signup.html">SIGN UP</a></li>
         </ul>
@@ -29,70 +28,78 @@
           <div class="form__content form__content--flex-column">
             <h3>Personal Details</h3>
             <div class="form__container">
-              <div class="form-content__container">
-                <i class="fas fa-hashtag form__icon"></i>
-                <input class="form__control" type="text" name="bvn" placeholder="Bank verification number">
-              </div>     
-              <div class="form-content__container">
-                <i class="fas fa-phone form__icon"></i>
-                <input class="form__control" type="tel" name="mobile" id="mobile" placeholder="Phone Number">
-              </div> 
-              <div class="form-content__container">
-                <i class="far fa-heart form__icon"></i>
-                <select class="form__control" name="marital-status" id="" required>
-                  <option value="marital-status" selected disabled>Marital Status</option>
-                  <option value="single">Single</option>
-                  <option value="married">Married</option>
-                  <option value="divorced">Divorced</option>
-                  <option value="widowed">Widowed</option>
-                </select>
-              </div> 
-              <div class="form-content__container">
-                <i class="far fa-user-circle form__icon"></i>
-                <select class="form__control" name="gender" id="" required>
-                  <option value="gender" selected disabled>Gender</option>
-                  <option value="male">Male</option>
-                  <option value="female">Female</option>
-                  <option value="not-to-say">Prefer not to say</option>
-                </select>
-              </div> 
-              <div class="form-content__container">
-                <i class="fas fa-child form__icon"></i>
-                <select class="form__control" name="dependent" id="" required>
-                  <option value="dependent" selected disabled>Number of Dependents</option>
-                  <option value="0">0</option>
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                  <option value="6">6</option>
-                  <option value="7">7</option>
-                  <option value="8">8</option>
-                  <option value="9">9</option>
-                  <option value="10">10</option>
-                  <option value="above 10">Above 10</option>
-                </select>
-              </div> 
-              <div class="form-content__container">
-                <i class="fas fa-university form__icon"></i>
-                <select class="form__control" name="education" id="" required>
-                  <option value="education-level" selected disabled>Highest Level of Education</option>
-                  <option value="none">None</option>
-                  <option value="primary">Primary</option>
-                  <option value="secondary">Secondary</option>
-                  <option value="tertiary">Tertiary</option>
-                  <option value="post-graduate">Post Graduate</option>
-                </select>
-              </div> 
-              <div class="form-content__container">
-                <i class="far fa-calendar-alt form__icon"></i>
-                <input class="form__control" type="date" name="birthday" max="2001-01-01" id="birthday" placeholder="Date of Birth">
-              </div> 
-              <div class="form-content__container">
-                <i class="fas fa-map-marker-alt form__icon"></i>
-                <textarea class="form__control" name="home-address" id="" cols="15" rows="5" placeholder="Home Address"></textarea>
-              </div> 
+              <div class="form-group">
+                <div class="form-content__container">
+                  <i class="fas fa-hashtag form__icon"></i>
+                  <input class="form__control" type="text" name="bvn" placeholder="Bank verification number">
+                </div>     
+                <div class="form-content__container">
+                  <i class="fas fa-phone form__icon"></i>
+                  <input class="form__control" type="tel" name="mobile" id="mobile" placeholder="Phone Number">
+                </div> 
+              </div>
+              <div class="form-group">
+                <div class="form-content__container">
+                    <i class="far fa-heart form__icon"></i>
+                    <select class="form__control" name="marital-status" id="" required>
+                      <option value="marital-status" selected disabled>Marital Status</option>
+                      <option value="single">Single</option>
+                      <option value="married">Married</option>
+                      <option value="divorced">Divorced</option>
+                      <option value="widowed">Widowed</option>
+                    </select>
+                  </div> 
+                  <div class="form-content__container">
+                    <i class="far fa-user-circle form__icon"></i>
+                    <select class="form__control" name="gender" id="" required>
+                      <option value="gender" selected disabled>Gender</option>
+                      <option value="male">Male</option>
+                      <option value="female">Female</option>
+                      <option value="not-to-say">Prefer not to say</option>
+                    </select>
+                  </div> 
+              </div>
+              <div class="form-group">
+                <div class="form-content__container">
+                  <i class="fas fa-child form__icon"></i>
+                  <select class="form__control" name="dependent" id="" required>
+                    <option value="dependent" selected disabled>Number of Dependents</option>
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="above 10">Above 10</option>
+                  </select>
+                </div> 
+                <div class="form-content__container">
+                  <i class="fas fa-university form__icon"></i>
+                  <select class="form__control" name="education" id="" required>
+                    <option value="education-level" selected disabled>Highest Level of Education</option>
+                    <option value="none">None</option>
+                    <option value="primary">Primary</option>
+                    <option value="secondary">Secondary</option>
+                    <option value="tertiary">Tertiary</option>
+                    <option value="post-graduate">Post Graduate</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="form-content__container">
+                  <i class="far fa-calendar-alt form__icon"></i>
+                  <input class="form__control" type="date" name="birthday" max="2001-01-01" id="birthday" placeholder="Date of Birth">
+                </div> 
+                <div class="form-content__container">
+                  <i class="fas fa-map-marker-alt form__icon"></i>
+                  <textarea class="form__control" name="home-address" id="" cols="15" rows="5" placeholder="Home Address"></textarea>
+                </div> 
+              </div>
             </div>
           </div>
         </form>
@@ -100,32 +107,36 @@
           <div class="form__content form__content--flex-column">
             <h3 class="">Employment Details</h3>
             <div class="form__container">
-              <div class="form-content__container">
-                <i class="fas fa-briefcase form__icon"></i>
-                <select class="form__control" name="work-details" id="">
-                  <option value="Source of Livelihood" selected disabled></option>
-                  <option value="Employed">Employed</option>
-                  <option value="Businessman">Businessman</option>
-                </select>
-              </div> 
-              <div class="form-content__container">
-                <i class="far fa-building form__icon"></i>
-                <input class="form__control" type="text" name="employer" placeholder="Employer Name" required>
-              </div> 
-              <div class="form-content__container">
-                <i class="fas fa-wallet form__icon"></i>
-                <select class="form__control" name="net-salary" id="">
-                  <option value="net-salary" selected disabled>Select Net salary</option>
-                  <option value="below-#50000">50000 naira and Below</option>
-                  <option value="btw-50&100">Above 50000 naira and below 100000 naira</option>
-                  <option value="btw-"></option>
-                  <option value=""></option>
-                </select>
-              </div> 
-              <div class="form-content__container">
-                <i class="fas fa-map-marker-alt form__icon"></i>
-                <textarea class="form__control" name="Office-address" id="" cols="15" rows="5" required placeholder="Work Address"></textarea>
-              </div> 
+              <div class="form-group">
+                <div class="form-content__container">
+                  <i class="fas fa-briefcase form__icon"></i>
+                  <select class="form__control" name="work-details" id="">
+                    <option value="Source of Livelihood" selected disabled></option>
+                    <option value="Employed">Employed</option>
+                    <option value="Businessman">Businessman</option>
+                  </select>
+                </div> 
+                <div class="form-content__container">
+                  <i class="far fa-building form__icon"></i>
+                  <input class="form__control" type="text" name="employer" placeholder="Employer Name" required>
+                </div> 
+              </div>
+              <div class="form-group">
+                <div class="form-content__container">
+                  <i class="fas fa-wallet form__icon"></i>
+                  <select class="form__control" name="net-salary" id="">
+                    <option value="net-salary" selected disabled>Select Net salary</option>
+                    <option value="below-#50000">50000 naira and Below</option>
+                    <option value="btw-50&100">Above 50000 naira and below 100000 naira</option>
+                    <option value="btw-"></option>
+                    <option value=""></option>
+                  </select>
+                </div> 
+                <div class="form-content__container">
+                  <i class="fas fa-map-marker-alt form__icon"></i>
+                  <textarea class="form__control" name="Office-address" id="" cols="15" rows="5" required placeholder="Work Address"></textarea>
+                </div> 
+              </div>                   
             </div>           
           </div>          
         </form>
@@ -133,18 +144,26 @@
           <div class="form__content">
             <h3>Loan Information</h3>
             <div class="form__container">
-              <div class="form-content__container">
-                <i class="fas fa-search-dollar form__icon"></i>
-                <select class="form__control" name="loan-reason" id="" required>
-                  <option value="loan-reason"disabled selected>Purpose of the Loan</option>
-                  <option value="student-loan">Student Loan</option>
-                  <option value="pay-day-loan">Pay Day Loan</option>
-                  <option value="small-business-loan">Small Business Loan</option>
-                  <option value="medical-emergency-loan">Medical Emergency Loan</option>
-                  <option value="house"></option>
-                </select>
-              </div> 
-              <div class="form-content__container form-content__container--flex--column">
+              <div class="form-group">
+                <div class="form-content__container">
+                  <i class="far fa-calendar-alt form__icon"></i>
+                  <input class="form__control" type="number" name="tenure" id="tenure" max="12" min="1" placeholder="Select Preferred Loan Tenure">
+                </div>
+                <div class="form-content__container">
+                  <i class="fas fa-search-dollar form__icon"></i>
+                  <select class="form__control" name="loan-reason" id="" required>
+                    <option value="loan-reason"disabled selected>Purpose of the Loan</option>
+                    <option value="student-loan">Student Loan</option>
+                    <option value="pay-day-loan">Pay Day Loan</option>
+                    <option value="small-business-loan">Small Business Loan</option>
+                    <option value="medical-emergency-loan">Medical Emergency Loan</option>
+                    <option value="house"></option>
+                  </select>
+                </div> 
+              </div>
+              <div></div>
+              
+              <div class="form-slider form-content__container--flex--column">
                 <p>Use the slider to select preferred loan amount</p>
                 <span class="form__span" id="selected">Amount: </span>
                 <div class="form__control">
@@ -153,13 +172,9 @@
                   </label>
                   <p>Monthly Repayments</p>
                 </div>
-              </div>
-              <div class="form-content__container">
-                <i class="far fa-calendar-alt form__icon"></i>
-                <input class="form__control" type="number" name="tenure" id="tenure" max="12" min="1" placeholder="Select Preferred Loan Tenure">
-              </div>
-              <div class="form-content__container">
-                <input class="form__input form__input--submit--yellow" type="submit" value="Apply">
+              </div> 
+              <div class="form-content__control form form__control--flex--center">
+                <input class="form__input form__input--submit--yellow form__input--submit--width" type="submit" value="Apply">
               </div>
             </div>
           </div>

@@ -9,6 +9,10 @@
   color: inherit;
 }
 
+.link:hover {
+  text-decoration: underline;
+}
+
 .container {
   display: flex;
   flex-direction: column;
