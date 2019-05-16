@@ -7,29 +7,29 @@
   <title>Quick Credit | Repaid Loans</title>
   <link rel="stylesheet" href="./css/loans.css">
 </head>
-<body class="page">
-  <header class="page__header header">
+<body class="page flexwrapper">
+  <header class="page__header header shadow">
     <a class="link" href="./index.html"> <img class="header__icon" src="./img/quick-credit-icon.jpeg" alt="Quick Credit"></a>
     <nav class="nav"> 
       <ul class="nav__content">
-        <li class="nav__item"><a class="link" href="./current.html">CURRENT LOANS</a></li>
-        <li class="nav__item"><a class="link" href="./repaid.html">REPAID LOANS</a></li>
-        <li class="nav__item"><a class="link" href="./transaction.html">POST REPAYMENT</a></li>
-        <li class="nav__item nav__item--color--visible"><a class="link" href="./index.html">LOG OUT</a></li>
+          <li class="nav__item"><a class="link" href="./current.html">CURRENT</a></li>
+          <li class="nav__item"><a class="link" href="./repaid.html">REPAID</a></li>
+          <li class="nav__item"><a class="link" href="./transaction.html">FIND LOAN</a></li>
+          <li class="nav__item"><a class="link" href="./verify-user.html">FIND USER</a></li>
+          <li class="nav__item nav__item--color--visible"><a class="link" href="./index.html">LOG OUT</a></li>
     </nav>
   </header>
-
+<div class="flexwrapper">
   <section class="all-applications">
     <div class="container">
       <table class="table">
         <h2 class="table__header">REPAID LOANS</h2>
         <tr class="table__row">
           <th class="table__header">Email</th>
-          <th class="table__header table__header--width">Tenor(months)</th>
+          <th class="table__header table__header--width">Tenor</th>
           <th class="table__header table__header--width">Amount</th>
           <th class="table__header table__header--width">Installments</th>
           <th class="table__header table__header--width">Balance</th>
-          <th class="table__header table__header--width">Interest</th>
         </tr>
         <tr class="table__row">
           <td class="table__data">naruto@dattebayo.Baka</td>
@@ -37,7 +37,6 @@
           <td class="table__data">500,000</td>
           <td class="table__data">80,000</td>
           <td class="table__data">160,000</td>
-          <td class="table__data">120,000</td>
         </tr>
         <tr class="table__row">
           <td class="table__data">shanara@sakura.lover</td>
@@ -45,7 +44,6 @@
           <td class="table__data">900,000</td>
           <td class="table__data">25989</td>
           <td class="table__data">890852</td>
-          <td class="table__data">3423454</td>
         </tr>
         <tr class="table__row">
           <td class="table__data">mendokse@Nara.lazy</td>
@@ -53,13 +51,12 @@
           <td class="table__data">400,000</td>
           <td class="table__data">32525</td>
           <td class="table__data">2312</td>
-          <td class="table__data">53253</td>
         </tr>
       </table>
     </div>
   </section>
 
-  <footer id="footer" class="footer">
+  <footer id="footer" class="footer shadow">
     <div class="footer__content">
       <div class="contact-us">
         <h3 class="footer__header">Contact us</h3>
@@ -80,5 +77,7 @@
     </div>     
     <h4 class="footer__copyright"> © 2019 Quick Credit inc.</h4>
   </footer>
+</div>
+  
 </body>
 </html>

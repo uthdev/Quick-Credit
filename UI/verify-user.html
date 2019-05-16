@@ -4,10 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Quick Credit | Current Loans</title>
+  <title>Quick Credit | Specific Loan Application</title>
   <link rel="stylesheet" href="./css/loans.css">
 </head>
-<body class="page ">
+<body class="page">
   <header class="page__header header shadow">
     <a class="link" href="./index.html"> <img class="header__icon" src="./img/quick-credit-icon.jpeg" alt="Quick Credit"></a>
     <nav class="nav"> 
@@ -20,45 +20,45 @@
       </ul>
     </nav>
   </header>
-<div class="flexwrapper">
-  <section class="all-applications">
-    <div class="container">
-      <table class="table">
-        <h2 class="table__header">CURRENT LOANS</h2>
-        <tr class="table__row">
-          <th class="table__header">Email</th>
-          <th class="table__header table__header--width">Tenor</th>
-          <th class="table__header table__header--width">Amount</th>
-          <th class="table__header table__header--width">Installments</th>
-          <th class="table__header table__header--width">Balance</th>
-        </tr>
-        
-        <tr class="table__row">
-          <td class="table__data">Sasuke-kun@uchiha.revenge</td>
-          <td class="table__data">10</td>
-          <td class="table__data">1,000,000</td>
-          <td class="table__data">120</td>
-          <td class="table__data">600,000</td>
-        </tr>
-        
-        <tr class="table__row">
-          <td class="table__data">mendokse@Nara.lazy</td>
-          <td class="table__data">12</td>
-          <td class="table__data">400,000</td>
-          <td class="table__data">32525</td>
-          <td class="table__data">2312</td>
-        </tr>
-        <tr class="table__row">
-          <td class="table__data">narutokun@hinata.shy</td>
-          <td class="table__data">12</td>
-          <td class="table__data">700,000</td>
-          <td class="table__data">1234</td>
-          <td class="table__data">23134</td>
-        </tr>
-      </table>
-    </div>
-  </section>
 
+  <section class="find-user">
+      <div class="container">       
+        <form class="form shadow form--background--white" action="" method="POST">
+          <div class="container__header">
+            <h2 class="form__header form__header--padding">USER DETAILS</h2>
+            <input class="form__control form__control--width" type="search" name="Repayment" id="Repayment" placeholder="Search user by email">
+          </div>
+          <div class="form__content">
+            <div class="user-info">
+              <img class="user__img" src="./img/avatar2.png" alt="User pic">
+              <h2 class="text-bold">Mercy Ekene</h2>
+              <h4 class="text-bold">mrcyekene@gmail.com</h4>
+              <p class="top-border">Client</p>
+            </div>
+            <div class="info__content">
+              <div>Address</div>
+              <div>No 2, Alhaji Olakunle Street, Ijeshatedo, Surulere, Lagos.</div>
+              <div>Total Loans</div>
+              <div>3</div>
+              <div>Repaid Loans</div>
+              <div>2</div>
+              <div>Current Loan</div>
+              <div>Loan5</div>
+              <div >Status</div>
+              <div id="status">Unverified</div>
+              <div>Verify user:</div>
+              <div><label class="switch">
+                  <input id="status-checkbox" type="checkbox">
+                  <span class="slider round"></span>
+                </label>
+              </div>
+              <div></div>
+            </div>   
+          </div>
+        </form>
+      </div>
+    </section>
+    <script src="./script/main.js"> </script>  
   <footer id="footer" class="footer shadow">
     <div class="footer__content">
       <div class="contact-us">
@@ -80,7 +80,5 @@
     </div>     
     <h4 class="footer__copyright"> © 2019 Quick Credit inc.</h4>
   </footer>
-</div>
-  
 </body>
 </html>
