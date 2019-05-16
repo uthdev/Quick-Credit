@@ -13,7 +13,7 @@
 }
 
 .nav {
-  width: 60%;
+  width: 52%;
 }
 
 .nav__item {
@@ -32,6 +32,7 @@
   background: #FF4787;
   border-radius: 12px;
   color: #ffffff;
+  margin-right: 30px;
 }
 
 .nav__item--color--visible:hover {
@@ -42,7 +43,7 @@
 .nav__content {
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: flex-end;
   padding-right: 1em;
   padding-left: 1em;
 }
