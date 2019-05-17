@@ -1,6 +1,6 @@
 .footer {
   background: #F2E52E;
-  padding: 20px;
+  padding: 0 40px;
 }
 
 /* .footer__header {
@@ -13,7 +13,7 @@
 }
 .footer__copyright {
   margin: 0;
-  padding: 20px;
+  padding: 10px;
   text-align: center;
   font-weight: bold;
 }

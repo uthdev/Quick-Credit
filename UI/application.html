@@ -7,11 +7,9 @@
     <title>Quick Credit | Loan application</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="stylesheet" href="./css/application.css">
-    <script src="./script/application.js"> 
-    </script>
   </head>
   <body class="page">
-    <header class="page__header header">
+    <header class="page__header header shadow">
       <a class="link" href="./index.html"> <img class="header__icon" src="./img/quick-credit-icon.jpeg" alt="Quick Credit" srcset=""> </a>
       <nav class="nav"> 
         <ul class="nav__content">
@@ -21,188 +19,74 @@
         </ul>
       </nav>
     </header>
-    <section class="loan-application">
-      <div class="container">       
-        <form class="form" action="" method="POST">
-          <h2 class="form__header">Loan Application</h2>
-          <div class="form__content form__content--flex-column">
-            <h3>Personal Details</h3>
-            <div class="form__container">
-              <div class="form-group">
-                <div class="form-content__container">
-                  <i class="fas fa-hashtag form__icon"></i>
-                  <input class="form__control" type="text" name="bvn" placeholder="Bank verification number">
-                </div>     
-                <div class="form-content__container">
-                  <i class="fas fa-phone form__icon"></i>
-                  <input class="form__control" type="tel" name="mobile" id="mobile" placeholder="Phone Number">
-                </div> 
+    <div class="flexwrapper">
+      <main class="loan-application">
+        <div class="form__container">       
+          <form class="form shadow form--background--white" action="" method="POST">
+            <h2 class="form__header">Loan Application</h2>
+            <div class="form__content">
+              <div class="form__element">
+                <span class="element__text">CHOOSE AMOUNT</span> 
+                <div class="amount__div" id="displayAmount">500000</div>
               </div>
-              <div class="form-group">
-                <div class="form-content__container">
-                    <i class="far fa-heart form__icon"></i>
-                    <select class="form__control" name="marital-status" id="" required>
-                      <option value="marital-status" selected disabled>Marital Status</option>
-                      <option value="single">Single</option>
-                      <option value="married">Married</option>
-                      <option value="divorced">Divorced</option>
-                      <option value="widowed">Widowed</option>
-                    </select>
-                  </div> 
-                  <div class="form-content__container">
-                    <i class="far fa-user-circle form__icon"></i>
-                    <select class="form__control" name="gender" id="" required>
-                      <option value="gender" selected disabled>Gender</option>
-                      <option value="male">Male</option>
-                      <option value="female">Female</option>
-                      <option value="not-to-say">Prefer not to say</option>
-                    </select>
-                  </div> 
-              </div>
-              <div class="form-group">
-                <div class="form-content__container">
-                  <i class="fas fa-child form__icon"></i>
-                  <select class="form__control" name="dependent" id="" required>
-                    <option value="dependent" selected disabled>Number of Dependents</option>
-                    <option value="0">0</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
-                    <option value="above 10">Above 10</option>
-                  </select>
-                </div> 
-                <div class="form-content__container">
-                  <i class="fas fa-university form__icon"></i>
-                  <select class="form__control" name="education" id="" required>
-                    <option value="education-level" selected disabled>Highest Level of Education</option>
-                    <option value="none">None</option>
-                    <option value="primary">Primary</option>
-                    <option value="secondary">Secondary</option>
-                    <option value="tertiary">Tertiary</option>
-                    <option value="post-graduate">Post Graduate</option>
-                  </select>
+              <div class="form__element--flex--column">
+                <div class="range__limits">
+                  <div class="limit">50,000</div>
+                  <div class="limit">1,000,000</div>
                 </div>
+                <input class="element__range" type="range" name="amount" id="amount" max="1000000" min="50000">
               </div>
-              <div class="form-group">
-                <div class="form-content__container">
-                  <i class="far fa-calendar-alt form__icon"></i>
-                  <input class="form__control" type="date" name="birthday" max="2001-01-01" id="birthday" placeholder="Date of Birth">
-                </div> 
-                <div class="form-content__container">
-                  <i class="fas fa-map-marker-alt form__icon"></i>
-                  <textarea class="form__control" name="home-address" id="" cols="15" rows="5" placeholder="Home Address"></textarea>
-                </div> 
+              <div class="form__element">
+                <span class="element__text">CHOOSE TENOR</span> 
+                <div class="tenor__div" id="displayTenor"></div><span class="tenor__div">Months</span> 
               </div>
-            </div>
+              <div class="form__element--flex--column">
+                <div class="range__limits">
+                  <div class="limit">1 month</div>
+                  <div class="limit">12 months</div>
+                </div>
+                <input class="element__range" type="range" name="tenor" id="tenor" max="12" min="1">
+              </div>
+              <div class="form__element form__element--underlined">
+                <span>Loan</span><span class="amountSelected">#500,000</span>
+              </div>
+              <div class="form__element form__element--underlined">
+                <div>Tenor</div>
+                <div class="selectedTenor">10 months</div>
+              </div>
+              <div class="form__element form__element--bold">
+                <span>Monthly repayment</span><span class="monthlyRepayment">#52,500</span>
+              </div>
+              <div class="form__element">
+                  <input class="element__submit" type="submit" value="Apply">
+              </div>
+            </div>        
+          </form>
+        </div>
+      </main>
+      <script src="./script/main.js"> </script>   
+      <footer id="footer" class="footer shadow">
+        <div class="footer__content">
+          <div class="contact-us">
+            <h3 class="footer__header">Contact us</h3>
+            <p></p>
+            <p></p>
+            <p></p>
           </div>
-        </form>
-        <form class="form " action="" method="POST">      
-          <div class="form__content form__content--flex-column">
-            <h3 class="">Employment Details</h3>
-            <div class="form__container">
-              <div class="form-group">
-                <div class="form-content__container">
-                  <i class="fas fa-briefcase form__icon"></i>
-                  <select class="form__control" name="work-details" id="">
-                    <option value="Source of Livelihood" selected disabled></option>
-                    <option value="Employed">Employed</option>
-                    <option value="Businessman">Businessman</option>
-                  </select>
-                </div> 
-                <div class="form-content__container">
-                  <i class="far fa-building form__icon"></i>
-                  <input class="form__control" type="text" name="employer" placeholder="Employer Name" required>
-                </div> 
-              </div>
-              <div class="form-group">
-                <div class="form-content__container">
-                  <i class="fas fa-wallet form__icon"></i>
-                  <select class="form__control" name="net-salary" id="">
-                    <option value="net-salary" selected disabled>Select Net salary</option>
-                    <option value="below-#50000">50000 naira and Below</option>
-                    <option value="btw-50&100">Above 50000 naira and below 100000 naira</option>
-                    <option value="btw-"></option>
-                    <option value=""></option>
-                  </select>
-                </div> 
-                <div class="form-content__container">
-                  <i class="fas fa-map-marker-alt form__icon"></i>
-                  <textarea class="form__control" name="Office-address" id="" cols="15" rows="5" required placeholder="Work Address"></textarea>
-                </div> 
-              </div>                   
-            </div>           
-          </div>          
-        </form>
-        <form class="form" action="">
-          <div class="form__content">
-            <h3>Loan Information</h3>
-            <div class="form__container">
-              <div class="form-group">
-                <div class="form-content__container">
-                  <i class="far fa-calendar-alt form__icon"></i>
-                  <input class="form__control" type="number" name="tenure" id="tenure" max="12" min="1" placeholder="Select Preferred Loan Tenure">
-                </div>
-                <div class="form-content__container">
-                  <i class="fas fa-search-dollar form__icon"></i>
-                  <select class="form__control" name="loan-reason" id="" required>
-                    <option value="loan-reason"disabled selected>Purpose of the Loan</option>
-                    <option value="student-loan">Student Loan</option>
-                    <option value="pay-day-loan">Pay Day Loan</option>
-                    <option value="small-business-loan">Small Business Loan</option>
-                    <option value="medical-emergency-loan">Medical Emergency Loan</option>
-                    <option value="house"></option>
-                  </select>
-                </div> 
-              </div>
-              <div></div>
-              
-              <div class="form-slider form-content__container--flex--column">
-                <p>Use the slider to select preferred loan amount</p>
-                <span class="form__span" id="selected">Amount: </span>
-                <div class="form__control">
-                  <label for="amount">500000 Naira
-                      <input class="form__slider" type="range" name="amount" id="amount" max="1000000" min="50000"> 1 million Naira
-                  </label>
-                  <p>Monthly Repayments</p>
-                </div>
-              </div> 
-              <div class="form-content__control form form__control--flex--center">
-                <input class="form__input form__input--submit--yellow form__input--submit--width" type="submit" value="Apply">
-              </div>
-            </div>
+          <div>
+            <h3 class="footer__header">Quick Links</h3>
           </div>
-          
-        </form>
-      </div>
-    </section>
-        
-    <footer id="footer" class="footer">
-      <div class="footer__content">
-        <div class="contact-us">
-          <h3 class="footer__header">Contact us</h3>
-          <p></p>
-          <p></p>
-          <p></p>
-        </div>
-        <div>
-          <h3 class="footer__header">Quick Links</h3>
-        </div>
-        <div class="social-media">
-          <h3 class="footer__header">Social Media</h3>
-          <a href="#"><img class="social-media__img" src="./img/facebook.png" alt="facebook"></a>
-          <a href="#"><img class="social-media__img" src="./img/twitter.jpg" alt="twitter"></a>
-          <a href="#"><img class="social-media__img" src="./img/instagram.jpg" alt="instagram"></a>
-          <a href="#"><img class="social-media__img" src="./img/whatsapp.png" alt="whatsapp"></a>
-        </div>
-      </div>     
-      <h4 class="footer__copyright"> © 2019 Quick Credit inc.</h4>
-    </footer>
+          <div class="social-media">
+            <h3 class="footer__header">Social Media</h3>
+            <a href="#"><img class="social-media__img" src="./img/facebook.png" alt="facebook"></a>
+            <a href="#"><img class="social-media__img" src="./img/twitter.jpg" alt="twitter"></a>
+            <a href="#"><img class="social-media__img" src="./img/instagram.jpg" alt="instagram"></a>
+            <a href="#"><img class="social-media__img" src="./img/whatsapp.png" alt="whatsapp"></a>
+          </div>
+        </div>     
+        <h4 class="footer__copyright"> © 2019 Quick Credit inc.</h4>
+      </footer>
+    </div>
+    
   </body>
 </html>

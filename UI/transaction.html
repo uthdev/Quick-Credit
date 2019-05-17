@@ -9,69 +9,65 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 </head>
 <body class="page">
-  <header class="page__header header">
+  <header class="page__header header shadow">
     <a class="link" href="./index.html"> <img class="header__icon" src="./img/quick-credit-icon.jpeg" alt="Quick Credit"></a>
     <nav class="nav"> 
       <ul class="nav__content">
-        <li class="nav__item"><a class="link" href="./current.html">CURRENT LOANS</a></li>
-        <li class="nav__item"><a class="link" href="./repaid.html">REPAID LOANS</a></li>
-        <li class="nav__item"><a class="link" href="./transaction.html">POST REPAYMENT</a></li>
-        <li class="nav__item nav__item--color--visible"><a class="link" href="./index.html">LOG OUT</a></li>
+          <li class="nav__item"><a class="link" href="./current.html">CURRENT</a></li>
+          <li class="nav__item"><a class="link" href="./repaid.html">REPAID</a></li>
+          <li class="nav__item"><a class="link" href="./transaction.html">FIND LOAN</a></li>
+          <li class="nav__item"><a class="link" href="./verify-user.html">FIND USER</a></li>
+          <li class="nav__item nav__item--color--visible"><a class="link" href="./index.html">LOG OUT</a></li>
       </ul>
     </nav>
   </header>
   <section class="loan-transaction">
     <div class="container">       
-      <form class="form" action="" method="POST">
+      <form class="form shadow form--background--white" action="" method="POST">
         <div class="container__header">
-          <h2 class="form__header form__header--padding">Loan Repayment Transaction</h2>
-            <input class="form__control form__control--width" type="search" name="Repayment" id="Repayment" placeholder="Search customer by email">
+          <h2 class="form__header form__header--padding">LOAN DETAILS</h2>
+          <input class="form__control form__control--width" type="search" name="Repayment" id="Repayment" placeholder="Search loan by ID">
         </div>
-        <div class="form__content form__content--flex--column">
-          <h3>Customer Details</h3>
-          
-
-          <div class="form__container">
-            <div class="form__control form__control--margin">
-                <div>
-                  <h4><span>Name: </span>Adeleke Uthman Gbolahan</h4>
-                </div>
-                <div>
-                  <p>Email: dummyemail@mail.com</p>
-                </div>
-                <div>
-                  <p>Address: No 32, Alhaji Olakunle Street, Ijesha, Surulere, Lagos.</p>
-                </div>
-                <div>
-                  <p>Bank Verification Number: 234354454523 </p>
-                </div>
-              </div>
-                 
-            <div class="form-content__container">
-              <i class="fas fa-money-bill form__icon"></i>
-              <input class="form__control" type="text" name="amount" id="amount" placeholder="Loan Amount">
-            </div> 
-            <div class="form-content__container">
-                <i class="fas fa-money-bill form__icon"></i>
-                <input class="form__control" type="text" name="installment" id="installment" placeholder="Monthly Installment">
-            </div>
-            <div class="form-content__container">
-                <i class="fas fa-money-bill form__icon"></i>
-                <input class="form__control" type="text" name="paid-amount" id="paid-amount" placeholder="Paid Amount">
-            </div>
-            <div class="form-content__container">
-                <i class="fas fa-money-bill form__icon"></i>
-                <input class="form__control" type="text" name="balance" id="balance" placeholder="Balance">
-            </div>
-            <div class="form-content__container">
-                <input class="form__input form__input--submit--yellow" type="submit" value="Send">
-              </div>
+        <div class="form__content">
+          <div class="user-info">
+            <img class="user__img" src="./img/avatar2.png" alt="User pic">
+            <h2 class="text-bold">Mercy Ekene</h2>
+            <h4 class="text-bold">mrcyekene@gmail.com</h4>
+            <p class="top-border">Client</p>
           </div>
+          <div class="loan-info">
+            <h4 class="head">Loan details</h4>
+            <div class="info__content"><div >Loan amount:</div>
+            <span class="visible-text">#525,000</span> 
+            <div >Tenor</div>
+            <div>10 months</div>
+            <div >Monthly Installment:</div>
+            <div>#52,500</div> 
+            <div class="visible-text">Repaid Amount:</div> 
+            <div >
+              #472,500
+            </div>
+            <div class="visible-text">Balance: </div>
+            <div >
+                 #52,5000
+            </div>
+            <div>Loan Status: </div>
+            <div>Pending</div>
+            <div>Change Status:</div>
+            <div>
+              <button class="btn btn-green"><i class="fas fa-check"></i></button>
+              <button class="btn btn-red"><i class="fas fa-times"></i></i></button>
+            </div>
+          </div>
+            
+            <input class="element__submit" type="submit" value="Post Repayment">
+          </div>   
         </div>
+        
       </form>
     </div>
   </section>
-  <footer id="footer" class="footer">
+  <footer id="footer" class="footer shadow">
     <div class="footer__content">
       <div class="contact-us">
         <h3 class="footer__header">Contact us</h3>

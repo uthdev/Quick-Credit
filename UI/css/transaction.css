@@ -2,3 +2,56 @@
 @import './footer.css';
 @import './form.css';
 @import './global.css';
+
+.dashboard{
+  display:grid;
+  grid-template-columns: 1fr 5fr;
+  grid-auto-rows: 450px;
+  background: rg
+}
+
+.sidebar-li li{
+  color: #F1F1F2;
+  font-size: 12px;
+  /* width: 99%; */
+  padding: 7px;
+  margin-left: -6px;
+
+}
+
+.menu-body{
+  background:   #617973;
+  padding: 10px;
+  min-height: 60%;
+  }
+/* 
+.sidebar{
+  display: none;
+} */
+/* .form-div2{
+  width: 70%;
+  margin: auto;
+  background: white;
+  padding: 30px;
+} */
+.menu-body li {
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+  grid-row-gap: 1;
+}
+.dashboard-area{
+  background:  white;
+  overflow: auto;
+  border: 2px solid white;
+  margin-top: -10px;
+}
+.sidebar-li li:hover{
+  background: rgba(64, 73, 104, 0.986);
+  color: #F1F1F2;
+  cursor: pointer;
+}
+
+#dashboard-menu-img{
+  width: 30px;
+  margin-top: 5px;
+}
