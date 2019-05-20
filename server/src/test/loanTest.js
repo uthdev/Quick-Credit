@@ -183,9 +183,9 @@ describe('LOANS TEST', () => {
   });
 
   describe('POST A LOAN REPAYMENT TRANSACTION', () => {
-    it('should return a status 201 code and create a repayment transaction when to a current loan', async() => {
+    it('should return a status 201 code and create a repayment transaction when no current loan', async() => {
       const res = await chai.request(app)
-      .post('/api/v1/loans/5/repayment')
+      .post('/api/v1/loans/4/repayment')
       .set('x-access-token', adminToken)
       expect(res).to.have.status(201);
       expect(res.body).to.have.property('data');
@@ -202,8 +202,8 @@ describe('LOANS TEST', () => {
   describe('GET REPAYMENT HISTORY OF SPECIFIC LOAN', () => {
     it('should return a status 200 code and get all repayment history to a specific loan', async () => {
       const res = await chai.request(app)
-      .get('/api/v1/loans/5/repayments')
-      .set('x-access-token', userToken)
+      .get('/api/v1/loans/4/repayments')
+      .set('x-access-token', unrepaidLoanUserToken);
       expect(res).to.have.status(200);
       expect(res.body).to.have.property('data');
     });

@@ -25,7 +25,7 @@ describe('USER TEST', () => {
       .post('/api/v1/auth/signup')
       .send(validUserAccount);
       expect(res).to.have.status(409);
-      expect(res.body.message).equal('This email address is already taken');
+      expect(res.body.message).equal('This email address is already registered');
     });
     it('should respond with status code 400 for invalid account signUp details', async () => {
       const res = await chai.request(app)
