@@ -23,8 +23,8 @@ export default class Access {
   }
 
   static async adminAccess (req, res, next) {
-    const { isAdmin } = req.user;
-    if (isAdmin !== true) {
+    const { isadmin } = req.user;
+    if (isadmin !== true) {
       return res.status(403).json({
         status: 403,
         error: 'Unauthorized Access!',
