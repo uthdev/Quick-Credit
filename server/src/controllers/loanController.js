@@ -26,10 +26,10 @@ const mailSender = async (loan) => {
   await sgMail.send(msg);
 }
 
-const loanFinder = async (loanId) => {
+const loanFinder = async (req, res, loanId) => {
   try {
     const rows = await Loan.findLoanById(loanId);
-    if(rows.length <= 0) {
+    if(rows.length === 0) {
       return res.status(404).json({
         status: 404,
         error: `Loan application with id: ${loanId} not found`,
@@ -70,7 +70,7 @@ export default class LoanController {
   static async getSpecificLoan (req, res) {
     const { loanId } = req.params;
     try {
-      const loan = await loanFinder(loanId);
+      const loan = await loanFinder(req, res, loanId);
       return res.status(200).json({
         status: 200,
         data: loan,
