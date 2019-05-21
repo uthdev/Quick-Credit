@@ -31,8 +31,8 @@ const authTestData = {
     password: 'wrongpass',
   },
   adminUser: {
-    email: 'woleadaabale@gmail.com',
-    password: 'wolebale',
+    email: 'adelekegbolahan92@yahoo.com',
+    password: 'jackJones92',
   },
   hasUnrepaidLoanUser: {
     email: 'tombraddy@yahoo.com',

@@ -10,8 +10,8 @@
     "clean": "rm -rf build && npm run build",
     "dev": "nodemon --exec babel-node ./server/src/index.js",
     "lint": "eslint --fix ./server/src/**/*.js",
-    "test": "nyc --reporter=lcov --reporter=text-lcov mocha --exit --require @babel/register --require babel-polyfill ./server/src/test/**/*.js || true | ./node_modules/coveralls/bin/coveralls.js && rm -rf coverage && rm -rf .nyc_output",
-    "spec": "nyc mocha --exit --require @babel/register --require babel-polyfill ./server/src/test/**/*.js || true",
+    "test": "npm run dbtest && nyc --reporter=lcov --reporter=text-lcov mocha --timeout 10000 --exit --require @babel/register --require babel-polyfill ./server/src/test/**/*.js || true | ./node_modules/coveralls/bin/coveralls.js && rm -rf coverage && rm -rf .nyc_output",
+    "spec": "npm run dbtest && nyc mocha --timeout 10000 --exit --require @babel/register --require babel-polyfill ./server/src/test/**/*.js || true ",
     "migrations": "babel-node server/src/database/dropTables && babel-node server/src/database/createTables",
     "seed": "babel-node server/src/database/seed",
     "dbtest": "npm run migrations && npm run seed"

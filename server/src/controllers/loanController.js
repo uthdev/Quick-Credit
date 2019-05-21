@@ -4,13 +4,12 @@ import data from '../mocks/mockData';
 import Repayment from '../models/repaymentModel';
 
 
-const { loans , repayments } = data;
 const mailSender = async (loan) => {
   sgMail.setApiKey(process.env.SENDGRID_API_KEY);
   let msg;
   if (loan.status === 'approved') {
     msg = {
-      to: loan.user,
+      to: loan.user_email,
       from: 'adelekegbolahan92@gmail.com',
       subject: 'Quick credit loan application',
       html: `<p>We are glad to notify you that your loan application of ${loan.amount} has been approved.</p><strong>Please reach us through this mail for any information you require</strong>`,
@@ -18,13 +17,28 @@ const mailSender = async (loan) => {
   }
   if (loan.status === 'rejected') {
     msg = {
-      to: loan.user,
+      to: loan.user_email,
       from: 'services@quick-credit.com',
       subject: 'Quick credit loan application ',
       html: `<p>We are sorry to notify you that your loan applicationof ${loan.amount} has been rejected.</p><strong>Please reach us through this mail for any information you require</strong>`,
     };
   }
-  sgMail.send(msg);
+  await sgMail.send(msg);
+}
+
+const loanFinder = async (loanId) => {
+  try {
+    const rows = await Loan.findLoanById(loanId);
+    if(rows.length <= 0) {
+      return res.status(404).json({
+        status: 404,
+        error: `Loan application with id: ${loanId} not found`,
+      });
+    } 
+  return rows[0];
+  } catch (error) {
+    return error;
+  } 
 }
 
 export default class LoanController {
@@ -34,156 +48,175 @@ export default class LoanController {
     if(status && repaid) {
       return next() 
     }
-    if (loans.length <= 0) {
-      return res.status(404).json({
-        status: 404,
-        message: 'No loan application available'
-      });
-    } else {
-      return res.status(200).json({
-        status: 200,
-        data: loans
-      });
-    }
+    try {
+      const loans = await Loan.getAll();
+      if ( loans <= 0) {
+        return res.status(404).json({
+          status: 404,
+          message: 'No loan application available'
+        });
+      } else {
+        return res.status(200).json({
+          status: 200,
+          data: loans
+        });
+      }
+    } catch(error) {
+      return error;
+    } 
+    
   }
 
   static async getSpecificLoan (req, res) {
     const { loanId } = req.params;
-
-    const loan = loans.find(existingLoan => existingLoan.id === Number(loanId));
-
-    if(!loan) {
-      return res.status(404).json({
-        status: 404,
-        error: `Loan application with id: ${loanId} not found`,
-      });
+    try {
+      const loan = await loanFinder(loanId);
+      return res.status(200).json({
+        status: 200,
+        data: loan,
+      }); 
+    } catch (error) {
+      return error;
     }
-    return res.status(200).json({
-      status: 200,
-      data: loan,
-    });
   }
 
   static async currentRepaid (req, res) {
     const status = req.query.status;
     const repaid = JSON.parse(req.query.repaid);
-    const repaidUnrepaid = loans.filter(existingLoan => existingLoan.status === status && existingLoan.repaid === repaid)
-
-    if(repaidUnrepaid.length <= 0 && repaid === false) {
-      return res.status(404).json({
-        status: 404,
-        error: 'No current loan!',
+    try {
+      const repaidUnrepaid = await Loan.findCurrentRepaid(status, repaid);
+      if(repaidUnrepaid.length <= 0 && repaid === false) {
+        return res.status(404).json({
+          status: 404,
+          error: 'No current loan!',
+        });
+      } else if (repaidUnrepaid.length <= 0 && repaid === true) {
+        return res.status(404).json({
+          status: 404,
+          error: 'No repaid loan!',
+        });
+      }
+      return res.status(200).json({
+        status: 200,
+        data: repaidUnrepaid,
       });
-    } else if (repaidUnrepaid.length <= 0 && repaid === true) {
-      return res.status(404).json({
-        status: 404,
-        error: 'No repaid loan!',
-      });
+    } catch (error) {
+      return error;
     }
-    return res.status(200).json({
-      status: 200,
-      data: repaidUnrepaid,
-    })
   }
 
   static async approveRejectLoan (req, res) {
     const { loanId } = req.params;
     const { status } = req.body;
-    const loan = loans.find(existingLoan => existingLoan.id === Number(loanId));
-
-    if(!loan) {
-      return res.status(404).json({
-        status: 404,
-        error: `Loan application with id: ${ loanId } not found`,
-      });
-    }
-    
-    loan.status = status;
-    await mailSender(loan);
-    const { amount : loanAmount, tenor, paymentInstallment : monthlyInstallment, interest } = loan;
-    
-    const response = { loanId, loanAmount, tenor, status, monthlyInstallment, interest }
-    return res.status(200).json({
-      status: 200,
-      data: response,
-    });    
+    try {
+      await loanFinder(loanId);
+      const rows = await Loan.updateLoan(loanId, 'status', status);
+      const approvedOrRejected = rows[0];
+      await mailSender(approvedOrRejected);
+      const { amount : loanAmount, tenor, payment_installment : monthlyInstallment, interest } = approvedOrRejected;
+      if (status === 'approved') {
+        const totalPayable = loanAmount + interest;
+        await Loan.updateLoan(loanId, 'balance', totalPayable);
+      }
+      const response = { loanId, loanAmount, tenor, status, monthlyInstallment, interest }
+      return res.status(200).json({
+        status: 200,
+        data: response,
+      });    
+    } catch (error) {
+      return error;
+    }  
   }
 
   static async createLoanApplication (req, res) {
-    const loanId = loans.length + 1;
     const { email, firstname, lastname } = req.user;
     const { tenor, amount } = req.body;
+    try {
+      const rowCount = await Loan.findCurrentLoanByUser(email);
+      if(rowCount > 0) {
+        return res.status(403).json({
+          status: 403,
+          message: 'You still have a current loan. You can only apply for another after it is paid up'
+        });
+      }
 
-    const loan = await new Loan(loanId, email, tenor, amount);
-    const hasUnrepaidLoan = loans.find( existingLoan => existingLoan.user === email && existingLoan.repaid === false && existingLoan.status === 'approved');
-    
-    if(hasUnrepaidLoan) {
-      return res.status(403).json({
-        status: 403,
-        message: 'You still have a current loan. You can only apply for another after it is paid up'
-      });
+      const loan = await new Loan( email, tenor, amount);
+      const rows = await loan.createLoanApplication();
+      const newLoan = rows[0];
+      const {id : loanId,  status, payment_installment : paymentInstallment, balance, interest } = newLoan;
+      const response = { loanId, firstname, lastname, email, tenor, amount, paymentInstallment, status, balance, interest };
+      return res.status(201).json({
+        status: 201,
+        data: response,
+      })
+    } catch (error) {
+      return error;
     }
-
-    loans.push(loan);
-    const { status, paymentInstallment, balance, interest } = loan;
-    const response = { loanId, firstname, lastname, email, tenor, amount, paymentInstallment, status, balance, interest };
-    return res.status(201).json({
-      status: 200,
-      data: response,
-    })
+    
   }
 
   static async createRepaymentTransaction(req, res)  {
     const { loanId } = req.params;
-    const repaymentId = repayments.length + 1;
-    const loan = loans.find(existingLoan => existingLoan.id === Number(loanId));
-
-    if(!loan) {
-      return res.status(404).json({
-        status: 404,
-        error: `Loan application with id: ${ loanId } not found`,
+    try {
+      const loan = await loanFinder(loanId);
+      if(loan.status === 'pending' || loan.status === 'rejected' || loan.repaid === true) {
+        return res.status(403).json({
+          status: 403,
+          error: `Loan application with id: ${loanId} is not approved or repaid`
+        })
+      }  
+      const { amount, payment_installment : monthlyInstallment, balance } = loan;
+      const newBalance = balance - monthlyInstallment;
+      const totalPayable = amount + ( amount * 0.05 )
+      const paidAmount = totalPayable - newBalance;
+      const repayment = await new Repayment(loanId, amount, monthlyInstallment);
+      
+      const newRows = await Loan.updateLoan(loanId, 'balance', newBalance); 
+      const updatedLoan = newRows[0];
+      if(updatedLoan.balance <= 0) {
+        await Loan.updateLoan(loanId, 'repaid', true);
+      }
+      const repaymentRow = await repayment.createRepayment();
+      const newRepayment = repaymentRow[0];
+      const { id, createdon } = newRepayment;
+      const response = {
+        id, loanId, createdon, amount, monthlyInstallment, paidAmount, balance: newBalance,  
+      }
+      return res.status(201).json({
+        status: 201,
+        data: response,
       });
+    } catch (error) {
+      return error;
     }
-    if(loan.status === 'pending' || loan.status === 'rejected' || loan.repaid === true) {
-      return res.status(403).json({
-        status: 403,
-        error: `Loan application with id: ${loanId} is not approved or repaid`
-      })
-    }   
-    const { amount, paymentInstallment : monthlyInstallment, balance } = loan;
-    const newBalance = balance - monthlyInstallment;
-    const totalPayable = amount + ( amount * 0.05 )
-    const paidAmount = totalPayable - newBalance;
-    const repayment = await new Repayment(repaymentId, loanId, amount, monthlyInstallment);
-    loan.balance = newBalance;
+     
     
-    if(loan.balance === 0) {
-      loan.repaid = true;
-    }
-    repayments.push(repayment);
-    const { id, createdOn } = repayment
-    const response = {
-      id, loanId, createdOn, amount, monthlyInstallment, paidAmount, balance: newBalance,  
-    }
-    return res.status(201).json({
-      status: 201,
-      data: response,
-    });
   }
 
   static async getRepaymentHistory(req, res) {
     const { loanId } = req.params;
-
-    const repaymentHistory = repayments.filter(loanRepayment => Number(loanRepayment.loanId) === Number(loanId));
-    if(repaymentHistory.length <= 0) {
-      return res.status(404).json({
-        status: 404,
-        error: 'No repayment made'
+    const { email } = req.user;
+    try {
+      const loan = await loanFinder(loanId);
+      if (loan.user_email !== email ) {
+        return res.status(409).json({
+          status: 409,
+          error: 'Unauthorize access! Invalid token'
+        });
+      }
+      const repaymentHistory = await Repayment.getRepaymentHistory(loanId);
+      if(repaymentHistory.length <= 0) {
+        return res.status(404).json({
+          status: 404,
+          error: 'No repayment made'
+        });
+      }
+      return res.status(200).json({
+        status: 200,
+        data: repaymentHistory
       });
+    } catch (error) {
+      return error
     }
-    return res.status(200).json({
-      status: 200,
-      data: repaymentHistory
-    });
   }
 }
