@@ -1,5 +1,4 @@
-import Validator from 'validatorjs';
-import customErrorMsgs from '../helpers/customErrorMsgs';
+import { validate } from '../helpers/validatorjs';
 
 export default class QueryValidator {
   static async validateQuery (req, res, next) {
@@ -10,16 +9,10 @@ export default class QueryValidator {
       repaid: 'boolean|required_if:status,approved'
     }
 
-    const validator = new Validator(query, queryProperties, customErrorMsgs);
-
-    validator.passes(() => next());
-    validator.fails(() => {
-      const errors = validator.errors.all();
-      return res.status(400).json({
-        status: 400,
-        error: errors,
-      });
-    })
-
+    try {
+      await validate(res, next, query, queryProperties);
+    } catch (error) {
+      return error;
+    }
   }
 }

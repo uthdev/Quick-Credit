@@ -1,5 +1,5 @@
 import pool from '../database/index';
-
+const interestRate = process.env.INTEREST_RATE;
 
 class Loan {
   constructor(user, tenor, amount) {
@@ -10,9 +10,9 @@ class Loan {
     this.repaid = false;
     this.tenor = tenor;
     this.amount = amount;
-    this.paymentInstallment = (amount + (0.05 * amount)) / tenor;
+    this.paymentInstallment = (amount + (interestRate * amount)) / tenor;
     this.balance = 0.00;
-    this.interest = 0.05 * amount;
+    this.interest = interestRate * amount;
   }
 
   async createLoanApplication() {

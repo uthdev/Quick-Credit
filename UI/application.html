@@ -25,20 +25,23 @@
           <form class="form shadow form--background--white" action="" method="POST">
             <h2 class="form__header">Loan Application</h2>
             <div class="form__content">
+              <div class="form__error" id="errorDisplay"></div>
               <div class="form__element">
                 <span class="element__text">CHOOSE AMOUNT</span> 
-                <div class="amount__div" id="displayAmount">500000</div>
+                <input class="amount__div" id="displayAmount" type="text" value="50000" placeholder="Enter amount">
               </div>
               <div class="form__element--flex--column">
                 <div class="range__limits">
                   <div class="limit">50,000</div>
                   <div class="limit">1,000,000</div>
                 </div>
-                <input class="element__range" type="range" name="amount" id="amount" max="1000000" min="50000">
+                <input class="element__range" type="range" name="amount" id="amount" max="1000000" min="50000" step="1000">
               </div>
               <div class="form__element">
-                <span class="element__text">CHOOSE TENOR</span> 
-                <div class="tenor__div" id="displayTenor"></div><span class="tenor__div">Months</span> 
+                <span class="element__text">CHOOSE TENOR</span>
+                <div class="form__tenor">
+                    <div class="tenor__div" id="displayTenor"></div><span class="tenor__div">Months</span>
+                </div>  
               </div>
               <div class="form__element--flex--column">
                 <div class="range__limits">

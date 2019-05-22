@@ -25,14 +25,14 @@ export default class AuthController {
       return error.message;
     }
     const {
-      id, email, firstname, lastname, status, isAdmin, password
+      id, email, firstname, lastname, status, isAdmin
     } = newUser; 
     const authData = {
       id, email, status, isAdmin, firstname, lastname
     }
     const token = await Jwt.generateToken(authData);
     const response = {
-      token, id, firstname, lastname, email, password
+      token, id, firstname, lastname, email
     }
     return res.status(201).json({
       status: 201,

@@ -41,7 +41,7 @@ const authTestData = {
 };
 
 const userTestData = {
-  unverifiedExisting: 'tombraddy@yahoo.com',
+  unverifiedExisting: 'johnjones@email.com',
   wrongEmail: 'dattebayo.com',
   nonExistingUser: 'alphabets@gmail.com',
 };
@@ -66,5 +66,6 @@ const loanTestData = {
     tenor: '10 years',
     amount: 1000000000,
   },
+  verifiedUser: 'johnjones@email.com'
 };
 export { authTestData, userTestData, loanTestData };

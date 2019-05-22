@@ -1,7 +1,7 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../index';
-import { authTestData, loanTestData } from './testData';
+import { authTestData, loanTestData, userTestData } from './testData';
 
 chai.use(chaiHttp);
 
@@ -10,8 +10,10 @@ const { adminUser, existingUserSignIn, hasUnrepaidLoanUser } = authTestData;
 const { 
   invalidLoanId, invalidQueryParams, validApproveLoan, 
   validRejectLoan, invalidApproveLoan, 
-  validLoanApplication, invalidLoanApplication
+  validLoanApplication, invalidLoanApplication, 
 } = loanTestData
+
+const { unverifiedExisting} = userTestData;
 
 let adminToken;
 let userToken;
@@ -26,6 +28,13 @@ describe('AUTH TEST', () => {
     expect(admin.body).to.have.property('data');
 
     adminToken = admin.body.data.token;
+
+  
+    const res = await chai.request(app)
+    .patch(`/api/v1/users/${unverifiedExisting}/verify`)
+    .set('x-access-token', adminToken)
+    expect(res).to.have.status(200);
+    expect(res.body.data.status).to.be.equal('verified');
 
     const user = await chai.request(app)
     .post('/api/v1/auth/signin')
@@ -192,7 +201,7 @@ describe('LOANS TEST', () => {
     });
     it('should return a status 403 when loan is paid', async() => {
       const res = await chai.request(app)
-      .post('/api/v1/loans/5/repayment')
+      .post('/api/v1/loans/4/repayment')
       .set('x-access-token', adminToken)
       expect(res).to.have.status(403);
       expect(res.body).to.have.property('error');

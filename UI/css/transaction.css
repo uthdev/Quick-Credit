@@ -24,16 +24,7 @@
   padding: 10px;
   min-height: 60%;
   }
-/* 
-.sidebar{
-  display: none;
-} */
-/* .form-div2{
-  width: 70%;
-  margin: auto;
-  background: white;
-  padding: 30px;
-} */
+
 .menu-body li {
   display: grid;
   grid-template-columns: 1fr 5fr;

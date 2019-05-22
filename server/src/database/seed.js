@@ -1,10 +1,13 @@
 import pool from './index';
 import { generateHash } from '../helpers/bcrypt'; 
-//seed admin
+
+
+const superAdminEmail = process.env.SUPER_ADMIN_EMAIL;
+const superAdminPassword = process.env.SUPER_ADMIN_PASSWORD;
+
 (async () => {
-  const password = 'jackJones92';
-  const hashedPassword = generateHash(password);
-  const params = ['adelekegbolahan92@yahoo.com', 'Gbolahan', 'Adeleke', hashedPassword, 'No 2, Alhaji Olakunle Street, Ijeshatedo, Surulere, Lagos', 'verified', true];
+  const hashedPassword = generateHash(superAdminPassword);
+  const params = [superAdminEmail, 'Gbolahan', 'Adeleke', hashedPassword, 'No 2, Alhaji Olakunle Street, Ijeshatedo, Surulere, Lagos', 'verified', true];
   try {
     const result = await pool.query('INSERT INTO users (email, firstname, lastname, password, address, status, isadmin) VALUES ($1, $2, $3, $4, $5, $6, $7)', params);
     console.log('Admin seeded');
