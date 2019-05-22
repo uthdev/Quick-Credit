@@ -1,30 +1,8 @@
-import sgMail from '@sendgrid/mail';
 import Loan from '../models/loanModel';
-import data from '../mocks/mockData';
+import { mailSender } from '../helpers/sgMail';
 import Repayment from '../models/repaymentModel';
 
-
-const mailSender = async (loan) => {
-  sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-  let msg;
-  if (loan.status === 'approved') {
-    msg = {
-      to: loan.user_email,
-      from: 'adelekegbolahan92@gmail.com',
-      subject: 'Quick credit loan application',
-      html: `<p>We are glad to notify you that your loan application of ${loan.amount} has been approved.</p><strong>Please reach us through this mail for any information you require</strong>`,
-    };
-  }
-  if (loan.status === 'rejected') {
-    msg = {
-      to: loan.user_email,
-      from: 'services@quick-credit.com',
-      subject: 'Quick credit loan application ',
-      html: `<p>We are sorry to notify you that your loan applicationof ${loan.amount} has been rejected.</p><strong>Please reach us through this mail for any information you require</strong>`,
-    };
-  }
-  await sgMail.send(msg);
-}
+const interestRate = process.env.INTEREST_RATE;
 
 const loanFinder = async (loanId) => {
   try {
@@ -35,7 +13,7 @@ const loanFinder = async (loanId) => {
         error: `Loan application with id: ${loanId} not found`,
       });
     } 
-  return rows[0];
+    return rows[0];
   } catch (error) {
     return error;
   } 
@@ -162,12 +140,12 @@ export default class LoanController {
       if(loan.status === 'pending' || loan.status === 'rejected' || loan.repaid === true) {
         return res.status(403).json({
           status: 403,
-          error: `Loan application with id: ${loanId} is not approved or repaid`
+          error: `Loan application is repaid/unapproved`
         })
       }  
       const { amount, payment_installment : monthlyInstallment, balance } = loan;
       const newBalance = balance - monthlyInstallment;
-      const totalPayable = amount + ( amount * 0.05 )
+      const totalPayable = amount + ( amount * interestRate )
       const paidAmount = totalPayable - newBalance;
       const repayment = await new Repayment(loanId, amount, monthlyInstallment);
       

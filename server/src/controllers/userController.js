@@ -14,7 +14,6 @@ export default class Usercontroller {
           error: 'User does not exist',
         })
       }
-      // console.log(rows);
       const verifiedRows = await User.updateUser(userEmail, 'status', 'verified');
       const verifiedUser = verifiedRows[0];    
       const { email, firstname, lastname, password, address, status } = verifiedUser;
