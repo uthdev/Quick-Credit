@@ -81,4 +81,14 @@ describe('USERS TEST DATA', () => {
       expect(res.body.data.status).to.be.equal('verified');
     });
   })
+
+  describe('MAKE USER ADMIN', () => {
+    it('Should return a status 200 success if user is Super admin', async () =>{
+      const res = await chai.request(app)
+      .patch(`/api/v1/users/${unverifiedExisting}/upgrade`)
+      .set('x-access-token', adminToken)
+      expect(res).to.have.status(200);
+      expect(res.body.data.isadmin).to.be.equal(true);
+    })
+  })
 })

@@ -61,4 +61,12 @@ export default class Access {
     } 
     next();
   }
+
+  static async isSuperAdmin (req, res, next) {
+    const { email } = req.user;
+    if(email !== process.env.SUPER_ADMIN_EMAIL) {
+      await errorResponse(res);
+    }
+    next();
+  }
 }
