@@ -19,9 +19,6 @@
   margin: 0;
   padding: 0;
 }
-.link:hover {
-  text-decoration: underline;
-}
 
 .container {
   display: flex;

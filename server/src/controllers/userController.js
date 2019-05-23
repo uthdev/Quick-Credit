@@ -1,28 +1,4 @@
-import User from '../models/userModel';
-const userFinder = async (res, email) => { 
-  try {
-    const rows = await User.findUserByEmail(email);
-    if(rows.length <= 0) {
-      return res.status(404).json({
-        status: 404,
-        error: 'User does not exist',
-      })
-    } 
-    return rows[0];
-  } catch (error) {
-    return error;
-  }
-}
-
-const userUpdator = async (userEmail ,columnToUpdate, updateValue) => {
-  try {
-    const updatedRows = await User.updateUser(userEmail, columnToUpdate, updateValue);
-    return updatedRows[0];   
-  } catch (error) {
-    return error;
-  }
-}
-
+import { userFinder, userUpdator } from '../helpers/functions';
 
 export default class Usercontroller {
   static async verifyClient (req, res) {

@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="./css/application.css">
   </head>
   <body class="page">
-    <header class="page__header header shadow">
+    <header class="page__header header">
       <a class="link" href="./index.html"> <img class="header__icon" src="./img/quick-credit-icon.jpeg" alt="Quick Credit" srcset=""> </a>
       <nav class="nav"> 
         <ul class="nav__content">
@@ -28,7 +28,7 @@
               <div class="form__error" id="errorDisplay"></div>
               <div class="form__element">
                 <span class="element__text">CHOOSE AMOUNT</span> 
-                <input class="amount__div" id="displayAmount" type="text" value="50000" placeholder="Enter amount">
+                <input class="amount__div" id="displayAmount" type="number" min="50000" max="1000000" value="50000" placeholder="Enter amount">
               </div>
               <div class="form__element--flex--column">
                 <div class="range__limits">
@@ -68,7 +68,7 @@
         </div>
       </main>
       <script src="./script/main.js"> </script>   
-      <footer id="footer" class="footer shadow">
+      <footer id="footer" class="footer">
         <div class="footer__content">
           <div class="contact-us">
             <h3 class="footer__header">Contact us</h3>

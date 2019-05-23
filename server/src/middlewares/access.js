@@ -46,7 +46,10 @@ export default class Access {
   static async nonAdminAccess (req, res, next) {
     const { isadmin } = req.user;
     if (isadmin) {
-      await errorResponse(res);
+      return res.status(403).json({
+        status: 403,
+        error: 'Admin cannot apply for loan',
+      })
     } 
     next(); 
   } 

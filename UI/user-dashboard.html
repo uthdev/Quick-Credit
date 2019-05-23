@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="./css/history.css">
 </head>
 <body class="page">
-  <header class="page__header header shadow">
+  <header class="page__header header">
     <a class="link" href="./index.html"> <img class="header__icon" src="./img/quick-credit-icon.jpeg" alt="Quick Credit"></a>
     <nav class="nav"> 
       <ul class="nav__content">
@@ -24,48 +24,57 @@
       <form class="form shadow form--background--white" action="" method="POST">
         <div class="container__header">
           <h2 class="form__header form__header--padding">USER DETAILS</h2>
-          <input class="form__control form__control--width" type="search" name="Repayment" id="Repayment" placeholder="Search loan by ID">
         </div>
-        <div class="form__content form__content--flex">
-          <div class="user-info flex__item">
-            <img class="user__img" src="./img/avatar2.png" alt="User pic">
-            <h2 class="text-bold">Mercy Ekene</h2>
-            <h4 class="text-bold">mrcyekene@gmail.com</h4>
-            <div>No 2, Alhaji Olakunle Street, Ijeshatedo, Surulere, Lagos.</div>
-          </div>
-          <div class="repayment-history flex__item">
-            <h4 class="repayment__header">Repayment History</h4>
-            <div class="info__content">
-              <div>Loan amount</div>
-              <div>#5000,000</div>
-              <div>Tenor</div>
-              <div>10 months</div>
-              <div>monthly Installment</div>
-              <div>#52,500</div>
-              <div class="text-bolden">Repayment</div>
-              <div class="text-bolden">1</div>
-              <div>Date</div>
-              <div>12/12/2018</div>
-              <div>Balance</div>
-              <div>#472,500</div>
-              <div class="text-bolden">Repayment</div>
-              <div class="text-bolden">2</div>
-              <div>Date</div>
-              <div>12/01/2019</div>
-              <div>Balance</div>
-              <div>#420,000</div>     
+        <div class="content--flex">
+            <div class="form__content form__content--flex">
+              <div class="user-info flex__item">
+                <img class="user__img" src="./img/avatar2.png" alt="User pic">
+                <h2 class="text-bold">Mercy Ekene</h2>
+                <h4 class="text-bold">mrcyekene@gmail.com</h4>
+                <div>No 2, Alhaji Olakunle Street, Ijeshatedo, Surulere, Lagos.</div>
+              </div>
             </div>
-          </div> 
-          <div class="change-password flex__item">
-            <input class="new-password" type="text" value="Enter new password">
-            <input class="element__submit new-password" type="submit" value="Change password">
-          </div>  
-        </div>   
+            <div class="repayments__info">
+              <div class="info__content">
+                <div>Loan amount</div>
+                <div>#5000,000</div>
+                <div>Tenor</div>
+                <div>10 months</div>
+                <div>monthly Installment</div>
+                <div>#52,500</div>
+              </div>
+              <table class="table table--padding">
+                <tr class="table__row">
+                  <th class="table__header">Repayments</th>
+                  <th class="table__header"> 1</th>
+                  <th class="table__header"> 2</th>
+                  <th class="table__header"> 3</th>
+                </tr>
+                <tr class="table__row">
+                  <td class="table__data">
+                    Date
+                  </td>
+                  <td class="table__data">
+                    12/12/2018
+                  </td>
+                  <td class="table__data">12/01/2019</td>
+                  <td class="table__data">12/02/2019</td>
+                </tr>
+                <tr class="table__row">
+                  <td class="table__data">Balance</td>
+                  <td class="table__data">#472,500</td>
+                  <td class="table__data">#420,000</td>
+                  <td class="table__data">#369,500</td>
+                </tr>
+              </table>
+            </div>   
+        </div>
+           
       </form>
     </div>
   </section>
 
-  <footer id="footer" class="footer shadow">
+  <footer id="footer" class="footer">
     <div class="footer__content">
       <div class="contact-us">
         <h3 class="footer__header">Contact us</h3>
