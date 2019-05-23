@@ -1,60 +1,57 @@
 import User from '../models/userModel';
 import data from '../mocks/mockData';
-// import { generateHash } from '../helpers/bcrypt';
-import Bcrypt from '../helpers/bcrypt';
+import { generateHash, comparePassword } from '../helpers/bcrypt';
 import Jwt from '../helpers/jwt';
-const { users } = data;
-const { generateHash, comparePassword } = Bcrypt;
-
 
 export default class AuthController {
   static async signUp (req, res) {
-    const id = users.length + 1;
-    const user =  await new User(req.body);
-    const userExist = users.find(existingUser => existingUser.email === user.email);
-    if (userExist) {
-      return res.status(409).json({
-        status: 409,
-        message: 'This email address is already taken'
-      });
+    const user = new User(req.body);
+    user.password =  generateHash(user.password);
+    try {
+      const rows = await User.findUserByEmail(user.email);
+      if (rows.length > 0) {
+        return res.status(409).json({
+          status: 409,
+          message: 'This email address is already registered'
+        });
+      } 
+    } catch (error) {
+      return error.message;
     }
-    user.password = await generateHash(user.password);
-    user.id = id;
-    user.status = 'unverified';
-    user.isAdmin = false;
+    let newUser;
+    try {
+      newUser = await user.createAccount();   
+    } catch(error) {
+      return error.message;
+    }
     const {
-      email, firstname, lastname, status, isAdmin, password
-    } = user;  
+      id, email, firstname, lastname, status, isAdmin
+    } = newUser; 
     const authData = {
       id, email, status, isAdmin, firstname, lastname
     }
-
-    const token = await Jwt.generateToken(authData);  
-
-    users.push(user);
+    const token = await Jwt.generateToken(authData);
     const response = {
-      token, id, firstname, lastname, email, password
+      token, id, firstname, lastname, email
     }
     return res.status(201).json({
       status: 201,
       data: response,
     });
-    
   }
 
   static async login (req, res) {
     const { email, password } = req.body;
-    const user = users.find(existingUser => existingUser.email === email);
-    
-    if (!user) {
+    const rows = await User.findUserByEmail(email);
+    if (rows.length <= 0) {
       return res.status(404).json({
         status: 404,
         error: 'User does not exist',
       });
     }
-
+    const user = rows[0];
     const { password: hashedPassword } = user;
-    const isMatch = await comparePassword(password, hashedPassword);
+    const isMatch = comparePassword(password, hashedPassword);
     if (!isMatch) {
       return res.status(401).json({
         status: 401,
@@ -63,11 +60,11 @@ export default class AuthController {
     }
 
     const {
-      id, status, isAdmin, firstname, lastname
+      id, status, isadmin, firstname, lastname, 
     } = user;
 
     const token = await Jwt.generateToken({
-      id, email, status, isAdmin, firstname, lastname
+      id, email, status, isadmin, firstname, lastname
     });
 
     const response = {

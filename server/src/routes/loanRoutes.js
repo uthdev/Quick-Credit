@@ -5,7 +5,7 @@ import ParamsValidator from '../middlewares/paramsValidator';
 import QueryValidator from '../middlewares/queryValidator';
 import LoanValidator from '../middlewares/loansValidator';
 
-const { verifyToken, adminAccess } = Access;
+const { verifyToken, adminAccess, nonAdminAccess, isVerified } = Access;
 const { loanId } = ParamsValidator;
 const { validateQuery } = QueryValidator;
 const { approveLoanValidator, loanApplicationValidator } = LoanValidator;
@@ -22,8 +22,7 @@ loanRoute.get('/', verifyToken, adminAccess, getAll, validateQuery, currentRepai
 loanRoute.get('/:loanId', verifyToken, adminAccess, loanId, getSpecificLoan);
 loanRoute.get('/:loanId/repayments', verifyToken, loanId, getRepaymentHistory);
 loanRoute.patch('/:loanId', verifyToken, adminAccess, loanId, approveLoanValidator, approveRejectLoan);
-loanRoute.post('/', verifyToken, loanApplicationValidator, createLoanApplication);
+loanRoute.post('/', verifyToken, nonAdminAccess, isVerified, loanApplicationValidator,  createLoanApplication);
 loanRoute.post('/:loanId/repayment', verifyToken, adminAccess, loanId, createRepaymentTransaction);
-
 
 export default loanRoute;

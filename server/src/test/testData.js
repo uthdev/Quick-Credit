@@ -31,8 +31,8 @@ const authTestData = {
     password: 'wrongpass',
   },
   adminUser: {
-    email: 'woleadaabale@gmail.com',
-    password: 'wolebale',
+    email: 'adelekegbolahan92@yahoo.com',
+    password: 'jackJones92',
   },
   hasUnrepaidLoanUser: {
     email: 'tombraddy@yahoo.com',
@@ -41,7 +41,7 @@ const authTestData = {
 };
 
 const userTestData = {
-  unverifiedExisting: 'tombraddy@yahoo.com',
+  unverifiedExisting: 'johnjones@email.com',
   wrongEmail: 'dattebayo.com',
   nonExistingUser: 'alphabets@gmail.com',
 };
@@ -66,5 +66,6 @@ const loanTestData = {
     tenor: '10 years',
     amount: 1000000000,
   },
+  verifiedUser: 'johnjones@email.com'
 };
 export { authTestData, userTestData, loanTestData };
