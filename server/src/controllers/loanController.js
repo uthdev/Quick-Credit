@@ -1,8 +1,6 @@
-import Loan from '../models/loanModel';
 import { mailSender } from '../helpers/sgMail';
+import Loan from '../models/loanModel';
 import Repayment from '../models/repaymentModel';
-
-const interestRate = process.env.INTEREST_RATE;
 
 const loanFinder = async (loanId) => {
   try {
@@ -13,7 +11,7 @@ const loanFinder = async (loanId) => {
         error: `Loan application with id: ${loanId} not found`,
       });
     } 
-    return rows[0];
+  return rows[0];
   } catch (error) {
     return error;
   } 
@@ -140,12 +138,12 @@ export default class LoanController {
       if(loan.status === 'pending' || loan.status === 'rejected' || loan.repaid === true) {
         return res.status(403).json({
           status: 403,
-          error: `Loan application is repaid/unapproved`
+          error: `Loan application with id: ${loanId} is not approved or repaid`
         })
       }  
       const { amount, payment_installment : monthlyInstallment, balance } = loan;
       const newBalance = balance - monthlyInstallment;
-      const totalPayable = amount + ( amount * interestRate )
+      const totalPayable = amount + ( amount * 0.05 )
       const paidAmount = totalPayable - newBalance;
       const repayment = await new Repayment(loanId, amount, monthlyInstallment);
       
