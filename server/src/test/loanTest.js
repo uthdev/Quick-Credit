@@ -77,14 +77,6 @@ describe('LOANS TEST', () => {
       expect(res).to.have.status(403);
       expect(res.body).to.have.property('error');
     });
-    // it('should return a status 404 error if no loan application is available', async () => {
-    //   const res = await chai.request(app)
-    //   .get('/api/v1/loans')
-    //   .set('x-access-token', adminToken)
-    //   expect(res).to.have.status(404);
-    //   expect(res.body).to.have.property('message');
-    //   expect(res.body.message).to.be.equal('No loan application available');
-    // });
     it('should return a status 200 success code and return all existing loan application', async () => {
       const res = await chai.request(app)
       .get('/api/v1/loans')
