@@ -1,5 +1,4 @@
 import User from '../models/userModel';
-import data from '../mocks/mockData';
 import { generateHash, comparePassword } from '../helpers/bcrypt';
 import Jwt from '../helpers/jwt';
 
@@ -25,14 +24,14 @@ export default class AuthController {
       return error.message;
     }
     const {
-      id, email, firstname, lastname, status, isAdmin
+      id, email, firstname : firstName, lastname : lastName, status, isAdmin
     } = newUser; 
     const authData = {
-      id, email, status, isAdmin, firstname, lastname
+      id, email, status, isAdmin, firstName, lastName
     }
     const token = await Jwt.generateToken(authData);
     const response = {
-      token, id, firstname, lastname, email
+      token, id, firstName, lastName, email
     }
     return res.status(201).json({
       status: 201,
@@ -60,15 +59,15 @@ export default class AuthController {
     }
 
     const {
-      id, status, isadmin, firstname, lastname, 
+      id, status, isadmin, firstname : firstName, lastname : lastName, 
     } = user;
 
     const token = await Jwt.generateToken({
-      id, email, status, isadmin, firstname, lastname
+      id, email, status, isadmin, firstName, lastName
     });
 
     const response = {
-      token, id, firstname, lastname, email
+      token, id, firstName, lastName, email
     }
     return res.status(200).json({
       status: 200,

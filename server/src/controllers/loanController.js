@@ -2,7 +2,7 @@ import { mailSender } from '../helpers/sgMail';
 import Loan from '../models/loanModel';
 import Repayment from '../models/repaymentModel';
 
-const loanFinder = async (loanId) => {
+const loanFinder = async (loanId, res) => {
   try {
     const rows = await Loan.findLoanById(loanId);
     if(rows.length <= 0) {
@@ -46,7 +46,7 @@ export default class LoanController {
   static async getSpecificLoan (req, res) {
     const { loanId } = req.params;
     try {
-      const loan = await loanFinder(loanId);
+      const loan = await loanFinder(loanId, res);
       return res.status(200).json({
         status: 200,
         data: loan,
@@ -85,14 +85,14 @@ export default class LoanController {
     const { loanId } = req.params;
     const { status } = req.body;
     try {
-      await loanFinder(loanId);
+      await loanFinder(loanId, res);
       const rows = await Loan.updateLoan(loanId, 'status', status);
       const approvedOrRejected = rows[0];
       await mailSender(approvedOrRejected);
       const { amount : loanAmount, tenor, payment_installment : monthlyInstallment, interest } = approvedOrRejected;
       if (status === 'approved') {
-        const totalPayable = loanAmount + interest;
-        await Loan.updateLoan(loanId, 'balance', totalPayable);
+        const totalPayable = Number(loanAmount) + Number(interest);
+        const result = await Loan.updateLoan(loanId, 'balance', totalPayable);
       }
       const response = { loanId, loanAmount, tenor, status, monthlyInstallment, interest }
       return res.status(200).json({
@@ -134,7 +134,7 @@ export default class LoanController {
   static async createRepaymentTransaction(req, res)  {
     const { loanId } = req.params;
     try {
-      const loan = await loanFinder(loanId);
+      const loan = await loanFinder(loanId, res);
       if(loan.status === 'pending' || loan.status === 'rejected' || loan.repaid === true) {
         return res.status(403).json({
           status: 403,
@@ -156,7 +156,7 @@ export default class LoanController {
       const newRepayment = repaymentRow[0];
       const { id, createdon } = newRepayment;
       const response = {
-        id, loanId, createdon, amount, monthlyInstallment, paidAmount, balance: newBalance,  
+        id, loanId, createdon, amount, monthlyInstallment, paidAmount: paidAmount.toFixed(2), balance: newBalance.toFixed(2),  
       }
       return res.status(201).json({
         status: 201,
@@ -173,7 +173,7 @@ export default class LoanController {
     const { loanId } = req.params;
     const { email } = req.user;
     try {
-      const loan = await loanFinder(loanId);
+      const loan = await loanFinder(loanId, res);
       if (loan.user_email !== email ) {
         return res.status(409).json({
           status: 409,

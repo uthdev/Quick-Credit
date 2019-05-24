@@ -19,9 +19,10 @@ output.oninput = function () {
   if(output.value >= 1000000) {
     output.value = 1000000.00;
   }
+  slider.value = output.value;
   selectedAmount.innerHTML = output.value;
   const monthltyInstallment = ((Number(output.value) * 0.05) + Number(output.value)) / tenor.value;
-  if(monthltyInstallment == NaN) {
+  if(monthltyInstallment == "NaN") {
     errorDisplay.innerHTML = 'Only Numeric values allowed';
   }
   monthlyRepayment.innerHTML = monthltyInstallment.toFixed(2);
