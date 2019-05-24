@@ -6,14 +6,30 @@
   text-align: center;
 }
 
+.table-container {
+  width: min-content;
+  margin: 0 auto;
+  margin-top: 40px;
+  padding: 20px;
+  display: flex;
+  flex: column;
+  align-items: center;
+  overflow: auto;
+}
+
 .table {
   background: rgba(185, 185, 185, 0.493);
   border-collapse: collapse;
   border-spacing: 0;
   border-radius: 5px;
-  width: 100%;
+  /* width: 80%; */
+  /* overflow: scroll; */
 }
 
+.table--padding {
+  margin: 30px;
+  overflow: auto;
+}
 .table__data {
   text-align: center;
   padding: 16px;
@@ -21,6 +37,11 @@
 
 .table__row:nth-child(even) {
   background: rgba(242, 229, 46, 0.555);
+}
+
+.content--flex {
+  display: flex;
+  justify-content: space-between;
 }
 
 .button-container {
@@ -41,22 +62,32 @@
   padding: 10px;
 }
 
+.repayments__info {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-bottom: 10px;
+}
+
 .button:hover {
   background: #ffffff;
   border: 1px solid #F2E52E;
 }
 @media (max-width: 950px) {
-  .table__header--width {
+  /* .table__header--width {
     padding: 10px;
-  }
+  } */
 
-  .table__data {
+  .content--flex {
+    flex-direction: column;
+  }
+  /* .table__data {
     text-align: center;
     padding: 0;
-  }
+  } */
 
-  .button-container {
+  /* .button-container {
     width: 100%;
-  }
+  } */
 }
 

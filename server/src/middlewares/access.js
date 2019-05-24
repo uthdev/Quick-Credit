@@ -46,7 +46,10 @@ export default class Access {
   static async nonAdminAccess (req, res, next) {
     const { isadmin } = req.user;
     if (isadmin) {
-      await errorResponse(res);
+      return res.status(403).json({
+        status: 403,
+        error: 'Admin cannot apply for loan',
+      })
     } 
     next(); 
   } 
@@ -59,6 +62,14 @@ export default class Access {
         error: 'You must be verified to be able to apply'
       });
     } 
+    next();
+  }
+
+  static async isSuperAdmin (req, res, next) {
+    const { email } = req.user;
+    if(email !== process.env.SUPER_ADMIN_EMAIL) {
+      await errorResponse(res);
+    }
     next();
   }
 }

@@ -4,19 +4,19 @@ class User {
   constructor(user) {
     this.id = user.id;
     this.email = user.email;
-    this.firstname = user.firstname;
-    this.lastname = user.lastname;
+    this.firstName = user.firstname;
+    this.lastName = user.lastname;
     this.password = user.password;
     this.address = user.address;
     this.status = user.status;
-    this.isadmin = user.isadmin;
+    this.isAdmin = user.isadmin;
   }
 
   async createAccount() {
     const status = 'unverified';
     const queryString = `INSERT INTO users (email, firstname, lastname, password, address, status)
     VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`;
-    const params = [this.email, this.firstname, this.lastname,
+    const params = [this.email, this.firstName, this.lastName,
       this.password, this.address, status];
     try {
       const { rows } = await pool.query(queryString, params);
