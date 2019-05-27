@@ -32,9 +32,6 @@
   padding: 10px;
 }
 
-/* .flex__item {
-  width: 33%;
-} */
 .form__input {
   display: block;
   width: 100%;
@@ -57,7 +54,6 @@
   background: #F2E52E;
   font-weight: bold;
   cursor: pointer;
-  /* width: 50%; */
 }
 
 .form__input--submit--width {
@@ -68,7 +64,6 @@
   color: #FF4787;
   font-weight: bold;
   cursor: pointer;
-  /* text-decoration-line: none; */
 }
 
 .form__control {
@@ -91,8 +86,6 @@
 }
 .form__control--margin {
   margin-right: 20px;
-  /* padding: 0; */
-  /* width: 95%; */
 }
 
 .form__control--width {
@@ -138,7 +131,6 @@
   resize: none;
   -webkit-appearance: none;
   width: 70%;
-  /* background: #111111; */
   background: #F2E52E;
   outline: none;
   -webkit-transition: .2s;
@@ -153,7 +145,6 @@
 }
 
 .form__slider::-webkit-slider-thumb {
-  /* -webkit-appearance: none; */
   appearance: none;
   width: 50px;
   height: 25px;
@@ -264,7 +255,6 @@
   flex-direction: column;
   text-align: center;
   padding: 20px;
-  /* width: 30%; */
 }
 
 .text-bold {
@@ -278,7 +268,6 @@
 
 .repayment-history {
   padding: 20px;
-  /* width:; */
 }
 
 .repayment__header {

@@ -22,8 +22,6 @@
   border-collapse: collapse;
   border-spacing: 0;
   border-radius: 5px;
-  /* width: 80%; */
-  /* overflow: scroll; */
 }
 
 .table--padding {
@@ -74,20 +72,10 @@
   border: 1px solid #F2E52E;
 }
 @media (max-width: 950px) {
-  /* .table__header--width {
-    padding: 10px;
-  } */
 
   .content--flex {
     flex-direction: column;
   }
-  /* .table__data {
-    text-align: center;
-    padding: 0;
-  } */
-
-  /* .button-container {
-    width: 100%;
-  } */
+ 
 }
 

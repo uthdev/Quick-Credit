@@ -1,4 +1,3 @@
-// user
 const authTestData = {
   validUserAccount: {
     firstname: 'john',
