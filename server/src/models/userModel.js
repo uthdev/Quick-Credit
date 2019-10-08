@@ -31,18 +31,18 @@ class User {
     const param = [email];
     try {
       const { rows } = await pool.query(queryString, param);
-      return rows;
+      return rows[0];
     } catch (error) {
       return error.message;
     }
   }
 
-  static async updateUser (email, valueToUpdate, updateValue) {
+  static async updateUser(email, valueToUpdate, updateValue) {
     const queryString = `UPDATE users SET ${valueToUpdate.replace(/"/g, '')} = $1 WHERE email = $2 RETURNING *`;
     const params = [updateValue, email];
     try {
       const { rows } = await pool.query(queryString, params);
-      return rows;
+      return rows[0];
     } catch (error) {
       return error;
     }

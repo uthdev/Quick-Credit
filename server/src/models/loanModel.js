@@ -1,4 +1,5 @@
 import pool from '../database/index';
+
 const interestRate = process.env.INTEREST_RATE;
 
 class Loan {
@@ -20,19 +21,19 @@ class Loan {
     const params = [this.user, this.createdOn, this.status, this.repaid, this.tenor, this.amount, this.paymentInstallment, this.balance, this.interest];
     try {
       const { rows } = await pool.query(queryString, params);
-      return rows;
+      return rows[0];
     } catch (error) {
       return error;
     }
   }
 
-  static async getAll () {
+  static async getAll() {
     const queryString = 'SELECT * FROM loans';
     try {
       const { rows } = await pool.query(queryString);
       return rows;
     } catch (error) {
-      return error.message;
+      return MediaStreamError;
     }
   }
 
@@ -41,45 +42,56 @@ class Loan {
     const param = [loanId];
     try {
       const { rows } = await pool.query(queryString, param);
-      return rows;
-    } catch (error) {
-      return error.message;
-    }
-  }
-
-  static async updateLoan(loanId, valueToUpdate , updateValue, ) {
-    const queryString = `UPDATE loans SET ${valueToUpdate.replace(/"/g, '')} = $1 WHERE id = $2 RETURNING *`
-    const params = [updateValue, loanId];
-    try {
-      const { rows } = await pool.query(queryString, params);
-      return rows;
+      return rows[0];
     } catch (error) {
       return error;
     }
   }
 
-  static async findCurrentLoanByUser (email) {
-    const queryString = `SELECT * FROM loans WHERE user_email = $1 AND status = $2 AND repaid = $3`;
+  static async updateLoan(loanId, columnsToUpdate, updateValue,) {
+    let queryString;
+    if (typeof columnsToUpdate === 'object') {
+      queryString = `UPDATE loans 
+      SET ${columnsToUpdate[0].replace(/"/g, '')} = '${updateValue[0]}', ${columnsToUpdate[1].replace(/"/g, '')} = '${updateValue[1]}' 
+      WHERE id = '${loanId}' RETURNING *`;
+    } else {
+      queryString = `UPDATE loans 
+      SET ${columnsToUpdate.replace(/"/g, '')} = '${updateValue}' 
+      WHERE id = '${loanId}' RETURNING *`;
+    }
+    try {
+      const { rows } = await pool.query(queryString);
+      return rows[0];
+    } catch (error) {
+      return error;
+    }
+  }
+
+  static async findCurrentLoanByUser(email) {
+    const queryString = 'SELECT * FROM loans WHERE user_email = $1 AND status = $2 AND repaid = $3';
     const params = [email, 'approved', false];
     try {
-      const { rowCount } = await pool.query(queryString, params);
-      return rowCount;
+      const { rows } = await pool.query(queryString, params);
+      return rows[0];
     } catch (error) {
       return error;
     }
   }
 
-  static async findCurrentRepaid(status, repaid) {
-    const queryString = `SELECT * FROM loans WHERE status = $1 AND repaid = $2 `
-    const params = [status, repaid];
+  static async filterLoans(filterValues, filterCriteria) {
+    let queryString;
+    if (typeof filterValues === 'object') {
+      queryString = `SELECT * FROM loans WHERE status = '${filterValues[0]}' AND repaid = '${filterValues[1]}'`;
+    } else {
+      queryString = `SELECT * FROM loans WHERE ${filterCriteria} = '${filterValues}'`;
+    }
     try {
-      const { rows } = await pool.query(queryString, params);
+      const { rows } = await pool.query(queryString);
       return rows;
     } catch (error) {
       return error;
-    }
-  }
-}
-
+    };
+  };
+};
 
 export default Loan;

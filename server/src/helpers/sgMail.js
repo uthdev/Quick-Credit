@@ -1,6 +1,6 @@
 import sgMail from '@sendgrid/mail';
 
-export const mailSender = async (loan) => {
+const mailSender = async (loan) => {
   sgMail.setApiKey(process.env.SENDGRID_API_KEY);
   let msg;
   if (loan.status === 'approved') {
@@ -20,4 +20,6 @@ export const mailSender = async (loan) => {
     };
   }
   await sgMail.send(msg);
-}
+};
+
+export default mailSender;

@@ -10,11 +10,11 @@ class Repayment {
   }
 
   async createRepayment() {
-    const queryString = `INSERT INTO repayments (loan_id, amount, monthly_installment) VALUES ($1, $2, $3) RETURNING *`;
+    const queryString = 'INSERT INTO repayments (loan_id, amount, monthly_installment) VALUES ($1, $2, $3) RETURNING *';
     const params = [this.loanId, this.amount, this.monthlyInstallment];
     try {
       const { rows } = await pool.query(queryString, params);
-      return rows;
+      return rows[0];
     } catch (error) {
       return error;
     }
