@@ -1,0 +1,883 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "1.0",
+    "title": "Quick credit",
+    "description": "<strong>Quick Credit is an online lending platform that provides short term soft loans to individuals. This helps solve problems of financial inclusion as a way to alleviate poverty and empower low income earners.</strong>",
+    "contact": {
+      "email": "adelekegbolahan92@gmail.com"
+    }
+  },
+  "servers": [
+    {
+      "url": "{protocol}://money-now.herokuapp.com/api/v1",
+      "variables": {
+        "protocol": {
+          "enum": [
+            "http",
+            "https"
+          ],
+          "default": "https"
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/auth/signup": {
+      "post": {
+        "summary": "Signup",
+        "description": "Creates a new user",
+        "tags": [
+          "Users"
+        ],
+        "operationId": "createUser",
+        "deprecated": false,
+        "requestBody": {
+          "description": "A JSON object that contains the user details",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SignupRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "New user is created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SignupSuccess"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "409": {
+            "description": "Email already exists",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Conflict"
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        }
+      }
+    },
+    "/auth/signin": {
+      "post": {
+        "summary": "Log in",
+        "description": "A route for users to login",
+        "tags": [
+          "Users"
+        ],
+        "operationId": "loginUser",
+        "deprecated": false,
+        "requestBody": {
+          "description": "A JSON object that contains the user login details",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SigninRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Success"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "description": "Invalid details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/wrongData"
+                }
+              }
+            }
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        }
+      }
+    },
+    "/users/{userEmail}/verify": {
+      "patch": {
+        "description": "A route to verify a user. User verification is done by the admin. Only verified user can apply for loan. User is verified by confirming the address provided during registration.",
+        "summary": "Admin verify user",
+        "tags": [
+          "Users"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "operationId": "verifyUser",
+        "deprecated": false,
+        "parameters": [
+          {
+            "name": "userEmail",
+            "in": "path",
+            "description": "email of the user to be verified",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/Success"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        }
+      }
+    },
+    "/users/{userEmail}/upgrade": {
+      "patch": {
+        "description": "A route to upgrade a user to an admin. This route is accessible to only the super-admin who has been seeded into the database.",
+        "summary": "Make user admin",
+        "tags": [
+          "Users"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "operationId": "upgradeUser",
+        "deprecated": false,
+        "parameters": [
+          {
+            "name": "userEmail",
+            "in": "path",
+            "description": "email of the user to be upgraded",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/Success"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        }
+      }
+    },
+    "/loans": {
+      "post": {
+        "description": "A route for a verified user to post a loan application",
+        "tags": [
+          "Loans"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "operationId": "postLoan",
+        "deprecated": false,
+        "requestBody": {
+          "description": "A JSON object that contains the loan details",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateloanRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/Created"
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        }
+      },
+      "get": {
+        "description": "A route to get all loans and get all current or repaid loans by specifying query params",
+        "summary": "Get all loans and filter loans",
+        "tags": [
+          "Loans"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "operationId": "getLoans",
+        "deprecated": false,
+        "parameters": [
+          {
+            "in": "query",
+            "name": "status",
+            "example": "approved",
+            "schema": {
+              "type": "string"
+            },
+            "description": "the status of the loans you wish to get. Value could only be either approved, rejected or pending"
+          },
+          {
+            "in": "query",
+            "name": "repaid",
+            "example": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "repaid status of the loan if it has been repaid or not. Value could only be either true or false"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/GetAll"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        }
+      }
+    },
+    "/loans/{loanId}": {
+      "get": {
+        "description": "A route to get a specific loan. Accessible to only admin",
+        "summary": "Get a specific loan",
+        "tags": [
+          "Loans"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "operationId": "getALoan",
+        "deprecated": false,
+        "parameters": [
+          {
+            "name": "loanId",
+            "in": "path",
+            "description": "Loan ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/Success"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        }
+      }
+    },
+    "/loans/{loanId}/approve": {
+      "patch": {
+        "description": "A route to approve a loan.Accessible to only admin",
+        "summary": "Approve loan application",
+        "tags": [
+          "Loans"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "operationId": "approveLoan",
+        "deprecated": false,
+        "parameters": [
+          {
+            "name": "loanId",
+            "in": "path",
+            "description": "Loan ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/Success"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        }
+      }
+    },
+    "/loans/{loanId}/reject": {
+      "patch": {
+        "description": "A route to reject a loan. Accessible to only admin",
+        "summary": "Reject loan application",
+        "tags": [
+          "Loans"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "operationId": "rejectLoan",
+        "deprecated": false,
+        "parameters": [
+          {
+            "name": "loanId",
+            "in": "path",
+            "description": "Loan ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/Success"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        }
+      }
+    },
+    "/loans/{loanId}/repayments": {
+      "post": {
+        "summary": "Post loan Repayment transaction for a specified loan",
+        "description": "A route for admin to post repayment transaction on behalf of a client",
+        "tags": [
+          "Loans"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "operationId": "postRepayment",
+        "deprecated": false,
+        "parameters": [
+          {
+            "name": "loanId",
+            "in": "path",
+            "description": "Loan ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/Success"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        }
+      },
+      "get": {
+        "summary": "Get all repayment transaction to a specified loan",
+        "description": "A route for admin to post repayment transaction on behalf of a client",
+        "tags": [
+          "Loans"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "operationId": "getRepayments",
+        "deprecated": false,
+        "parameters": [
+          {
+            "name": "loanId",
+            "in": "path",
+            "description": "Loan ID",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/Success"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "500": {
+            "$ref": "#/components/responses/ServerError"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "responses": {
+      "Created": {
+        "description": "Created",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Created"
+            }
+          }
+        }
+      },
+      "Success": {
+        "description": "Success",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Success"
+            }
+          }
+        }
+      },
+      "GetAll": {
+        "description": "Find All",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/GetAll"
+            }
+          }
+        }
+      },
+      "BadRequest": {
+        "description": "Bad Request",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/BadRequest"
+            }
+          }
+        }
+      },
+      "NotFound": {
+        "description": "The specified resource was not found",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/NotFound"
+            }
+          }
+        }
+      },
+      "Unauthorized": {
+        "description": "Unauthorized",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/UnauthorizedError"
+            }
+          }
+        }
+      },
+      "Forbidden": {
+        "description": "Forbidden",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ForbiddenError"
+            }
+          }
+        }
+      },
+      "ServerError": {
+        "description": "Server Error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ServerError"
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "SignupRequest": {
+        "title": "Signup Request",
+        "example": {
+          "email": "Johndoe@email.com",
+          "firstname": "John",
+          "lastname": "Doe",
+          "password": "123456",
+          "address": "No 20, Fagbenro Street, Ijesha, Surulere, lagos"
+        },
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "firstname": {
+            "type": "string"
+          },
+          "lastname": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "address": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "email",
+          "firstname",
+          "lastname",
+          "password",
+          "address"
+        ]
+      },
+      "Created": {
+        "title": "Created",
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": 201
+          },
+          "data": {
+            "type": "object",
+            "example": {}
+          }
+        }
+      },
+      "Success": {
+        "title": "Success",
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": 200
+          },
+          "data": {
+            "type": "object",
+            "example": {}
+          }
+        }
+      },
+      "GetAll": {
+        "title": "GetAll",
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": 200
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "example": {}
+            }
+          }
+        }
+      },
+      "SignupSuccess": {
+        "title": "Signup Success",
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": 201
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "token": {
+                "type": "string",
+                "example": "knsd9435n.90jk34589kjs897345.asdf987234nk8f9as"
+              },
+              "id": {
+                "type": "number",
+                "example": 1
+              },
+              "email": {
+                "type": "string",
+                "example": "johndoe@email.com"
+              },
+              "firstName": {
+                "type": "string",
+                "example": "John"
+              },
+              "lastName": {
+                "type": "string",
+                "example": "Doe"
+              }
+            }
+          }
+        }
+      },
+      "SigninRequest": {
+        "title": "Signin Request",
+        "example": {
+          "email": "Johndoe@email.com",
+          "password": "123456"
+        },
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "email",
+          "password"
+        ]
+      },
+      "CreateloanRequest": {
+        "title": "Create loan Request",
+        "example": {
+          "tenor": 10,
+          "amount": 500000
+        },
+        "type": "object",
+        "properties": {
+          "tenor": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "amount": {
+            "type": "number",
+            "format": "float"
+          }
+        },
+        "required": [
+          "tenor",
+          "amount"
+        ]
+      },
+      "wrongData": {
+        "title": "Invalid data",
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": 401
+          },
+          "error": {
+            "type": "string",
+            "example": "Invalid  password/email"
+          }
+        }
+      },
+      "UnauthorizedError": {
+        "title": "noAuth",
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": 401
+          },
+          "error": {
+            "type": "string",
+            "example": "Authorization token required"
+          }
+        }
+      },
+      "ForbiddenError": {
+        "title": "Forbidden",
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": 403
+          },
+          "error": {
+            "type": "string"
+          }
+        }
+      },
+      "Conflict": {
+        "title": "Conflict",
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": 409
+          },
+          "error": {
+            "type": "string",
+            "example": "This email address is already registered"
+          }
+        }
+      },
+      "NotFound": {
+        "title": "Non Existing Resource",
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": 404
+          },
+          "error": {
+            "type": "string"
+          }
+        }
+      },
+      "BadRequest": {
+        "title": "Bad Request",
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": 400
+          },
+          "error": {
+            "type": "object",
+            "example": {}
+          }
+        }
+      },
+      "ServerError": {
+        "title": "Internal Error",
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": 500
+          },
+          "error": {
+            "type": "string",
+            "example": "Internal Server Error"
+          }
+        }
+      }
+    }
+  }
+}
