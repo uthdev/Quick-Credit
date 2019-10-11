@@ -20,7 +20,6 @@ Quick Credit is an online lending platform that provides short term soft loans t
 - Admin can view all loan applications.
 - Admin can view all current loans (not fully repaid).
 - Admin can view all repaid loans.
-- User can reset password.
 - Real time email notification upon approval or rejection of a loan request.
 
 
@@ -40,18 +39,25 @@ The api is hosted on [Heroku] https://money-now.herokuapp.com/api/v1/
 
 
 ---
+## Documentation
+The api is documented on with Swagger on [Quick-credit api-doc](https://money-now.herokuapp.com/api-docs/)
+
+
+---
 ## Technologies Used
-- [Node.js] 
-- [Express.js]
-- [ESLint]
+- [Node.js](https://nodejs.org/en/)
+- [Express.js](https://expressjs.com)
+- [ESLint](https://eslint.org)
+- [Swagger](https://swagger.io/docs/)
+- [PostgreSQL](https://www.postgresql.org/)
 
 
 ---
 ## Testing Tools
-- [Mocha]
-- [Chai]
-- [NYC]
-- [Postman]
+- [Mocha](https://mochajs.org)
+- [Chai](https://www.chaijs.com)
+- [NYC](https://istanbul.js.org)
+- [Postman](https://www.getpostman.com)
 
 
 ---
@@ -63,7 +69,8 @@ METHOD |  RESOURCE   |     DESCRIPTION                | ENDPOINTS
 -------|-------------|--------------------------------|-----------
 GET    | ----        | Home page                      |`/api/v1`
 POST   | loan        | Create a loan application      |`/api/v1/loans`
-PATCH  | loan        | Approve/Reject loan application|`/api/v1/loans/:loanId`
+PATCH  | loan        | Approve a loan application     |`/api/v1/loans/:loanId/approve`
+PATCH  | loan        | Reject a loan application      |`/api/v1/loans/:loanId/reject`
 GET    | loan        | Get a specific loan application|`/api/v1/loans/:loanId`
 GET    | loan        | Get all loans                  |`/api/v1/loans/`
 GET    | loan        | Get all repaid loans           |`/api/v1/loans?status=approved&repaid=true`
@@ -73,6 +80,7 @@ POST   | loan        | Create a repayment transaction |`/api/v1/loans/:loanId/re
 POST   | User        | User signup                    |`/api/v1/auth/signup`
 POST   | User        | User signin                    |`/api/v1/auth/signin`
 PATCH  | User        | verify a user account          |`/api/v1/users/:userEmail/verify`
+PATCH  | User        | upgrade a user to admin        |`/api/v1/users/:userEmail/upgrade`
 
 
 ---
@@ -116,5 +124,5 @@ Andela
 
 ---
 ## Author
-
 Adeleke Gbolahan Uthman
+
