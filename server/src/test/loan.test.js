@@ -7,13 +7,12 @@ chai.use(chaiHttp);
 
 const { expect } = chai;
 const { adminUser, existingUserSignIn, hasUnrepaidLoanUser } = authTestData;
-const { 
-  invalidLoanId, invalidQueryParams, validApproveLoan, 
-  validRejectLoan, invalidApproveLoan, 
-  validLoanApplication, invalidLoanApplication, 
-} = loanTestData
+const {
+  invalidLoanId, invalidQueryParams,
+  validLoanApplication, invalidLoanApplication,
+} = loanTestData;
 
-const { unverifiedExisting} = userTestData;
+const { unverifiedExisting } = userTestData;
 
 let adminToken;
 let userToken;
@@ -22,8 +21,8 @@ let unrepaidLoanUserToken;
 describe('AUTH TEST', () => {
   it('Should signin Admin', async () => {
     const admin = await chai.request(app)
-    .post('/api/v1/auth/signin')
-    .send(adminUser)
+      .post('/api/v1/auth/signin')
+      .send(adminUser);
     expect(admin).to.have.status(200);
     expect(admin.body).to.have.property('data');
 
@@ -31,22 +30,22 @@ describe('AUTH TEST', () => {
 
   
     const res = await chai.request(app)
-    .patch(`/api/v1/users/${unverifiedExisting}/verify`)
-    .set('x-access-token', adminToken)
+      .patch(`/api/v1/users/${unverifiedExisting}/verify`)
+      .set({ Authorization: `Bearer ${adminToken}` });
     expect(res).to.have.status(200);
     expect(res.body.data.status).to.be.equal('verified');
 
     const user = await chai.request(app)
-    .post('/api/v1/auth/signin')
-    .send(existingUserSignIn);
+      .post('/api/v1/auth/signin')
+      .send(existingUserSignIn);
     expect(user).to.have.status(200);
     expect(user.body).to.have.property('data');
 
     userToken = user.body.data.token;
 
     const unRepaidLoanUser = await chai.request(app)
-    .post('/api/v1/auth/signin')
-    .send(hasUnrepaidLoanUser);
+      .post('/api/v1/auth/signin')
+      .send(hasUnrepaidLoanUser);
     expect(user).to.have.status(200);
     expect(user.body).to.have.property('data');
 
@@ -58,29 +57,29 @@ describe('LOANS TEST', () => {
   describe('GET ALL LOAN APPLICATIONS', () => {
     it('should return a status 401 error if no token is provided', async () => {
       const res = await chai.request(app)
-      .get(`/api/v1/loans`)
-      .set('Accept', 'application/json')
+        .get('/api/v1/loans')
+        .set('Accept', 'application/json');
       expect(res).to.have.status(401);
       expect(res.body).to.have.property('error');
     });
     it('should return a status 403 error if user is not logged or wrong token is provided', async () => {
       const res = await chai.request(app)
-      .get(`/api/v1/loans`)
-      .set('x-access-token', 'user not logged in')
+        .get('/api/v1/loans')
+        .set({ Authorization: `Bearer ${'user not logged in'}` });
       expect(res).to.have.status(403);
       expect(res.body).to.have.property('error');
     });
     it('should return a status 403 error if user is not Admin', async () => {
       const res = await chai.request(app)
-      .get(`/api/v1/loans`)
-      .set('x-access-token', userToken)
+        .get('/api/v1/loans')
+        .set({ Authorization: `Bearer ${userToken}` });
       expect(res).to.have.status(403);
       expect(res.body).to.have.property('error');
     });
     it('should return a status 200 success code and return all existing loan application', async () => {
       const res = await chai.request(app)
-      .get('/api/v1/loans')
-      .set('x-access-token', adminToken)
+        .get('/api/v1/loans')
+        .set({ Authorization: `Bearer ${adminToken}` });
       expect(res).to.have.status(200);
       expect(res.body).to.have.property('data');
     });
@@ -89,112 +88,108 @@ describe('LOANS TEST', () => {
   describe('GET SPECIFIC LOAN', () => {
     it('should return a status 400 when params validation fails', async () => {
       const res = await chai.request(app)
-      .get(`/api/v1/loans/${invalidLoanId}`)
-      .set('x-access-token', adminToken)
+        .get(`/api/v1/loans/${invalidLoanId}`)
+        .set({ Authorization: `Bearer ${adminToken}` });
       expect(res).to.have.status(400);
       expect(res.body).to.have.property('error');
-    })
+    });
 
     it('should return a status 200 and return the requested loan application', async () => {
       const res = await chai.request(app)
-      .get(`/api/v1/loans/1`)
-      .set('x-access-token', adminToken)
+        .get('/api/v1/loans/1')
+        .set({ Authorization: `Bearer ${adminToken}` });
       expect(res).to.have.status(200);
       expect(res.body).to.have.property('data');
-    })
-  })
+    });
+  });
   
   describe('GET REPAID  AND CURRENT LOANS', () => {
     it('should return a status 200 and return all repaid loans', async () => {
       const res = await chai.request(app)
-      .get('/api/v1/loans?status=approved&repaid=true')
-      .set('x-access-token', adminToken)
+        .get('/api/v1/loans?status=approved&repaid=true')
+        .set({ Authorization: `Bearer ${adminToken}` });
+      expect(res).to.have.status(200);
+      expect(res.body).to.have.property('data');
+    });
+    it('should return a status 200 and return all rejected loans', async () => {
+      const res = await chai.request(app)
+        .get('/api/v1/loans?status=rejected')
+        .set({ Authorization: `Bearer ${adminToken}` });
       expect(res).to.have.status(200);
       expect(res.body).to.have.property('data');
     });
     it('should return a status 200 and return all current loans', async () => {
       const res = await chai.request(app)
-      .get('/api/v1/loans?status=approved&repaid=false')
-      .set('x-access-token', adminToken)
+        .get('/api/v1/loans?status=approved&repaid=false')
+        .set({ Authorization: `Bearer ${adminToken}` });
       expect(res).to.have.status(200);
       expect(res.body).to.have.property('data');
     });
     it('should return a status 400 when query validation fails', async () => {
       const res = await chai.request(app)
-      .get(`/api/v1/loans?${invalidQueryParams}`)
-      .set('x-access-token', adminToken)
+        .get(`/api/v1/loans?${invalidQueryParams}`)
+        .set({ Authorization: `Bearer ${adminToken}` });
       expect(res).to.have.status(400);
       expect(res.body).to.have.property('error');
-    })
+    });
   });
 
   describe('APPROVE OR REJECT LOAN', () => {
     it('should return status 200 and approve the loan', async () => {
       const res = await chai.request(app)
-      .patch('/api/v1/loans/1')
-      .set('x-access-token', adminToken)
-      .send(validApproveLoan)
+        .patch('/api/v1/loans/1/approve')
+        .set({ Authorization: `Bearer ${adminToken}` });
       expect(res).to.have.status(200);
       expect(res.body.data.status).to.be.equal('approved');
-    })
+    });
     it('should return status 200 and reject the loan', async () => {
       const res = await chai.request(app)
-      .patch('/api/v1/loans/1')
-      .set('x-access-token', adminToken)
-      .send(validRejectLoan);
+        .patch('/api/v1/loans/1/reject')
+        .set({ Authorization: `Bearer ${adminToken}` });
       expect(res).to.have.status(200);
       expect(res.body.data.status).to.be.equal('rejected');
-    })
-    it('should return a status 400 when request validation fails', async () => {
-      const res = await chai.request(app)
-      .patch(`/api/v1/loans/1`)
-      .set('x-access-token', adminToken)
-      .send(invalidApproveLoan);
-      expect(res).to.have.status(400);
-      expect(res.body).to.have.property('error');
-    })
-
+    });
   });
 
   describe('POST A LOAN APPLICATION', () => {
     it('should return a status 201 code and create a loan application', async () => {
       const res = await chai.request(app)
-      .post('/api/v1/loans')
-      .set('x-access-token', userToken)
-      .send(validLoanApplication);
+        .post('/api/v1/loans')
+        .set({ Authorization: `Bearer ${userToken}` })
+        .send(validLoanApplication);
       expect(res).to.have.status(201);
       expect(res.body).to.have.property('data');
     });
     it('should return a status 400 error code when loan application validation fails', async () => {
       const res = await chai.request(app)
-      .post('/api/v1/loans')
-      .set('x-access-token', userToken)
-      .send(invalidLoanApplication);
+        .post('/api/v1/loans')
+        .set({ Authorization: `Bearer ${userToken}` })
+        .send(invalidLoanApplication);
       expect(res).to.have.status(400);
       expect(res.body).to.have.property('error');
     });
     it('should return a status 403 error code when user has an unrepaid loan', async () => {
       const res = await chai.request(app)
-      .post('/api/v1/loans')
-      .set('x-access-token', unrepaidLoanUserToken)
-      .send(validLoanApplication);
+        .post('/api/v1/loans')
+        .set({ Authorization: `Bearer ${unrepaidLoanUserToken}` })
+        .send(validLoanApplication);
       expect(res).to.have.status(403);
-      expect(res.body).to.have.property('message');
+      expect(res.body).to.have.property('error');
     });
   });
 
   describe('POST A LOAN REPAYMENT TRANSACTION', () => {
-    it('should return a status 201 code and create a repayment transaction when no current loan', async() => {
+    it('should return a status 201 code and create a repayment transaction when no current loan', async () => {
       const res = await chai.request(app)
-      .post('/api/v1/loans/4/repayment')
-      .set('x-access-token', adminToken)
+        .post('/api/v1/loans/4/repayments')
+        .set({ Authorization: `Bearer ${adminToken}` });
       expect(res).to.have.status(201);
       expect(res.body).to.have.property('data');
     });
-    it('should return a status 403 when loan is paid', async() => {
+    it('should return a status 403 when loan is paid', async () => {
       const res = await chai.request(app)
-      .post('/api/v1/loans/4/repayment')
-      .set('x-access-token', adminToken)
+        .post('/api/v1/loans/4/repayments')
+        .set({ Authorization: `Bearer ${adminToken}` });
       expect(res).to.have.status(403);
       expect(res.body).to.have.property('error');
     });
@@ -203,8 +198,8 @@ describe('LOANS TEST', () => {
   describe('GET REPAYMENT HISTORY OF SPECIFIC LOAN', () => {
     it('should return a status 200 code and get all repayment history to a specific loan', async () => {
       const res = await chai.request(app)
-      .get('/api/v1/loans/4/repayments')
-      .set('x-access-token', unrepaidLoanUserToken);
+        .get('/api/v1/loans/4/repayments')
+        .set({ Authorization: `Bearer ${unrepaidLoanUserToken}` });
       expect(res).to.have.status(200);
       expect(res.body).to.have.property('data');
     });

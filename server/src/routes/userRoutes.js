@@ -1,16 +1,17 @@
 import { Router } from 'express';
 import UserController from '../controllers/userController';
-import Access from '../middlewares/access';
-import ParamsValidator from '../middlewares/paramsValidator';
+import Authenticate from '../middlewares/authenticate';
+import AccountValidator from '../middlewares/accountValidation';
+import Services from '../middlewares/services';
 
-const { verifyToken, adminAccess, isSuperAdmin } = Access;
-const { userEmail } = ParamsValidator;
+const { userEmail } = AccountValidator;
+const { verifyToken, adminAccess, isSuperAdmin } = Authenticate;
+const { userExist } = Services;
+const { verifyClient, makeAdmin } = UserController;
 
 const userRoute = new Router();
 
-const { verifyClient, makeAdmin } = UserController;
-
-userRoute.patch('/:userEmail/verify', verifyToken, adminAccess, userEmail, verifyClient);
-userRoute.patch('/:userEmail/upgrade', verifyToken, isSuperAdmin, userEmail, makeAdmin)
+userRoute.patch('/:userEmail/verify', verifyToken, adminAccess, userEmail, userExist, verifyClient);
+userRoute.patch('/:userEmail/upgrade', verifyToken, isSuperAdmin, userEmail, userExist, makeAdmin);
 
 export default userRoute;

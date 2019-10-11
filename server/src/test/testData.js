@@ -47,16 +47,7 @@ const userTestData = {
 
 const loanTestData = {
   invalidLoanId: 'cat',
-  invalidQueryParams: 'status=rejected&repaid=true',
-  validApproveLoan: {
-    status: 'approved',
-  },
-  validRejectLoan: {
-    status: 'rejected',
-  },
-  invalidApproveLoan: {
-    status: 'unapproved',
-  },
+  invalidQueryParams: 'status=reject',
   validLoanApplication: {
     tenor: 9,
     amount: 1500000,

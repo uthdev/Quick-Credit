@@ -1,28 +1,30 @@
 import { Router } from 'express';
 import LoanController from '../controllers/loanController';
-import Access from '../middlewares/access';
-import ParamsValidator from '../middlewares/paramsValidator';
-import QueryValidator from '../middlewares/queryValidator';
+import Authenticate from '../middlewares/authenticate';
 import LoanValidator from '../middlewares/loansValidator';
+import Services from '../middlewares/services';
 
-const { verifyToken, adminAccess, nonAdminAccess, isVerified } = Access;
-const { loanId } = ParamsValidator;
-const { validateQuery } = QueryValidator;
-const { approveLoanValidator, loanApplicationValidator } = LoanValidator;
-
+const { loanExist } = Services;
+const {
+  verifyToken, adminAccess, nonAdminAccess, isVerified
+} = Authenticate;
+const {
+  loanApplicationValidator, loanId, filterQuery
+} = LoanValidator;
 const {
   getAll, getSpecificLoan, currentRepaid,
-  approveRejectLoan, createLoanApplication,
+  approveLoan, rejectLoan, createLoanApplication,
   createRepaymentTransaction, getRepaymentHistory,
 } = LoanController;
 
 const loanRoute = new Router();
 
-loanRoute.get('/', verifyToken, adminAccess, getAll, validateQuery, currentRepaid);
-loanRoute.get('/:loanId', verifyToken, adminAccess, loanId, getSpecificLoan);
-loanRoute.get('/:loanId/repayments', verifyToken, loanId, getRepaymentHistory);
-loanRoute.patch('/:loanId', verifyToken, adminAccess, loanId, approveLoanValidator, approveRejectLoan);
-loanRoute.post('/', verifyToken, nonAdminAccess, isVerified, loanApplicationValidator,  createLoanApplication);
-loanRoute.post('/:loanId/repayment', verifyToken, adminAccess, loanId, createRepaymentTransaction);
+loanRoute.get('/', verifyToken, adminAccess, getAll, filterQuery, currentRepaid);
+loanRoute.get('/:loanId', verifyToken, adminAccess, loanId, loanExist, getSpecificLoan);
+loanRoute.get('/:loanId/repayments', verifyToken, loanId, loanExist, getRepaymentHistory);
+loanRoute.patch('/:loanId/approve', verifyToken, adminAccess, loanId, loanExist, approveLoan);
+loanRoute.patch('/:loanId/reject', verifyToken, adminAccess, loanId, loanExist, rejectLoan);
+loanRoute.post('/', verifyToken, nonAdminAccess, isVerified, loanApplicationValidator, createLoanApplication);
+loanRoute.post('/:loanId/repayments', verifyToken, adminAccess, loanId, loanExist, createRepaymentTransaction);
 
 export default loanRoute;
